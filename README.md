@@ -1,36 +1,141 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Spectrum - Internal Talent Marketplace
+
+Spectrum is an internal talent marketplace designed to replace the current Airtable-based solution. It provides a comprehensive platform for discovering and connecting with internal talent across a wide range of skills and expertise.
+
+## Features
+
+- **Talent Profiles**: Comprehensive profiles with detailed skill information
+- **Search & Discovery**: Advanced search with multiple filters
+- **Skills Directory**: Browse and explore available skills
+- **Data Import**: Import data from Airtable or CSV files
+- **Profile Management**: Create and edit talent profiles
+- **Availability Tracking**: Track talent availability and scheduling
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js 18.x or later
+- npm 9.x or later
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-org/spectrum.git
+   cd spectrum
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env.local` file in the root directory:
+   ```env
+   # Add any environment variables here
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Project Structure
+
+```
+spectrum/
+├── src/
+│   ├── app/                 # Next.js app directory
+│   │   ├── api/            # API routes
+│   │   ├── profiles/       # Profile pages
+│   │   ├── skills/         # Skills directory pages
+│   │   └── import/         # Import functionality
+│   ├── components/         # React components
+│   ├── lib/               # Utility functions and data handling
+│   └── types/             # TypeScript type definitions
+├── data/                  # JSON data storage
+├── public/               # Static assets
+└── tests/               # Test files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Data Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application uses a JSON-based data structure stored in the `data` directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```typescript
+interface TalentProfile {
+  id: string;
+  name: string;
+  department: string;
+  title: string;
+  contact: {
+    email: string;
+    phone: string;
+    website?: string;
+    social: {
+      linkedin?: string;
+      twitter?: string;
+      // ... other social profiles
+    };
+  };
+  skills: Array<{
+    id: string;
+    name: string;
+    category: string;
+    proficiency: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+  }>;
+  availability: {
+    status: 'Available' | 'Busy' | 'Away';
+    availableFrom?: string;
+    notes?: string;
+  };
+}
+```
 
-## Learn More
+## Development
 
-To learn more about Next.js, take a look at the following resources:
+### Available Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run test` - Run tests
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Adding New Features
 
-## Deploy on Vercel
+1. Create new components in `src/components`
+2. Add new pages in `src/app`
+3. Add new API routes in `src/app/api`
+4. Update types in `src/types`
+5. Add tests in `tests` directory
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Data Import
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The application supports importing data from:
+- Airtable exports (JSON)
+- CSV files
+
+See the import page for more details.
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Next.js for the framework
+- Tailwind CSS for styling
+- Zod for validation
+- React Hook Form for form handling

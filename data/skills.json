@@ -1,0 +1,1936 @@
+{
+  "skills": [
+    {
+      "name": "Communication",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "yn0paprmy"
+    },
+    {
+      "name": "AWS Certified Solutions Architect",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "sjfn1y99t"
+    },
+    {
+      "name": "Leadership",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "qt9i86kk2"
+    },
+    {
+      "name": "Team Management",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "1gv4tupqh"
+    },
+    {
+      "name": "Problem-Solving",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "yk6cvgpov"
+    },
+    {
+      "name": "Critical Thinking",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "03lszm95i"
+    },
+    {
+      "name": "Decision Making",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "mvld2js00"
+    },
+    {
+      "name": "Time Management",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "01kub9xly"
+    },
+    {
+      "name": "Prioritization",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "wlr8tilb8"
+    },
+    {
+      "name": "Public Speaking",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "nlr9zupvp"
+    },
+    {
+      "name": "Presentation",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "z0pzmb7h7"
+    },
+    {
+      "name": "Customer Service",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "0h6a5h1l7"
+    },
+    {
+      "name": "Client Relationship Management",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "2dktwji4x"
+    },
+    {
+      "name": "Adaptability",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "u6x1k7oyp"
+    },
+    {
+      "name": "Creativity",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "ieyaseort"
+    },
+    {
+      "name": "Remote Work",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "jzezudj5e"
+    },
+    {
+      "name": "Collaboration",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "eu8sweb9e"
+    },
+    {
+      "name": "Emotional Intelligence",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "ogf1poxlk"
+    },
+    {
+      "name": "Conflict Resolution",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "ixdmecqi6"
+    },
+    {
+      "name": "Negotiation",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "v8fekkbrz"
+    },
+    {
+      "name": "Research",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "ms5t7yn99"
+    },
+    {
+      "name": "Analysis",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "r1yrgcout"
+    },
+    {
+      "name": "Report Writing",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "mrpbrabkn"
+    },
+    {
+      "name": "Technical Documentation",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "723bsnw2h"
+    },
+    {
+      "name": "Bilingual/Multilingual",
+      "category": "General Professional Skills",
+      "proficiency": "Intermediate",
+      "id": "gv5oc0o10"
+    },
+    {
+      "name": "Healthcare IT",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "x5ta1me1o"
+    },
+    {
+      "name": "Biotech",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "b0yau4mnk"
+    },
+    {
+      "name": "Legal Tech",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "py91pxdqm"
+    },
+    {
+      "name": "Fintech",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "3pxgy9g9y"
+    },
+    {
+      "name": "AgTech",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "1e9pn4mb7"
+    },
+    {
+      "name": "EdTech",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "14dsouec5"
+    },
+    {
+      "name": "CleanTech",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "5pw7qegvs"
+    },
+    {
+      "name": "Blockchain",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "7x78f3rn4"
+    },
+    {
+      "name": "Cryptocurrency",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "p2nn00997"
+    },
+    {
+      "name": "Smart Contracts",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "gqudbty5l"
+    },
+    {
+      "name": "IoT Development",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "99eirwhak"
+    },
+    {
+      "name": "AR/VR Development",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "71m3ulszr"
+    },
+    {
+      "name": "Game Development",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "mzynri1eg"
+    },
+    {
+      "name": "Unity",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "i883tmwkt"
+    },
+    {
+      "name": "Unreal Engine",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "05pzmgedz"
+    },
+    {
+      "name": "Robotics",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "4193pgxrj"
+    },
+    {
+      "name": "Aerospace",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "huscmzuvv"
+    },
+    {
+      "name": "Automotive",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "rtng9bwc1"
+    },
+    {
+      "name": "E-commerce",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "byenoy1a9"
+    },
+    {
+      "name": "Retail",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "h5nyfpmca"
+    },
+    {
+      "name": "Telecommunications",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "61i0h8rhw"
+    },
+    {
+      "name": "Manufacturing",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "it7gv3qws"
+    },
+    {
+      "name": "Real Estate",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "l025iprqg"
+    },
+    {
+      "name": "Oil & Gas",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "di3zavqfi"
+    },
+    {
+      "name": "Renewable Energy",
+      "category": "Specialized Industries",
+      "proficiency": "Intermediate",
+      "id": "cmw4h2y9h"
+    },
+    {
+      "name": "Microsoft Certified: Azure Solutions Architect",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "um768t24x"
+    },
+    {
+      "name": "Google Cloud Certified: Professional Cloud Architect",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "sb9i40dhr"
+    },
+    {
+      "name": "Certified ScrumMaster (CSM)",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "gelr7c5ah"
+    },
+    {
+      "name": "Project Management Professional (PMP)",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "i03ro902z"
+    },
+    {
+      "name": "Certified Scrum Product Owner (CSPO)",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "urragh3jf"
+    },
+    {
+      "name": "Certified Information Systems Security Professional (CISSP)",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "mhy7ld6bn"
+    },
+    {
+      "name": "Certified Data Scientist",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "9f86gkxtw"
+    },
+    {
+      "name": "ITIL Certification",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "1d0aca51f"
+    },
+    {
+      "name": "Six Sigma Certification",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "cvpvykwr0"
+    },
+    {
+      "name": "Chartered Financial Analyst (CFA)",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "bphok7lmb"
+    },
+    {
+      "name": "Certified Public Accountant (CPA)",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "z5d9r6fb3"
+    },
+    {
+      "name": "Professional in Human Resources (PHR)",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "0gmu0gi3i"
+    },
+    {
+      "name": "Certified Digital Marketing Professional",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "0efhs508u"
+    },
+    {
+      "name": "Google Analytics Certification",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "wlefp4657"
+    },
+    {
+      "name": "HubSpot Certifications",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "aterv5ay2"
+    },
+    {
+      "name": "Salesforce Certified Administrator",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "smbjuj3vp"
+    },
+    {
+      "name": "Cisco Certified Network Associate (CCNA)",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "3fx3fm0mb"
+    },
+    {
+      "name": "CompTIA Security+",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "3jzwjz1yn"
+    },
+    {
+      "name": "Adobe Certified Expert",
+      "category": "Certifications",
+      "proficiency": "Intermediate",
+      "id": "ktb86kf9f"
+    },
+    {
+      "name": "Operations Management",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "x0b5cdf9p"
+    },
+    {
+      "name": "Supply Chain Management",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "1584u1ej9"
+    },
+    {
+      "name": "Process Optimization",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "2j9rqmd7k"
+    },
+    {
+      "name": "Logistics Management",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "6bbigs3fq"
+    },
+    {
+      "name": "Inventory Management",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "1kmv86m8v"
+    },
+    {
+      "name": "Quality Control",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "qmz6gvjmb"
+    },
+    {
+      "name": "Lean Manufacturing",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "nuzvqulio"
+    },
+    {
+      "name": "Six Sigma",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "ctivzu88y"
+    },
+    {
+      "name": "ERP Implementation",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "gnbrqgn7k"
+    },
+    {
+      "name": "SAP ERP",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "vubgzg7nh"
+    },
+    {
+      "name": "Oracle ERP",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "5uac79hd2"
+    },
+    {
+      "name": "Microsoft Dynamics",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "ghf8wn3b0"
+    },
+    {
+      "name": "Warehouse Management",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "pry5n0vau"
+    },
+    {
+      "name": "Facilities Management",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "yhz4fhugp"
+    },
+    {
+      "name": "Vendor Management",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "wa7gdrb6t"
+    },
+    {
+      "name": "Contract Management",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "jkqxbv69t"
+    },
+    {
+      "name": "Negotiation",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "6wr7351rz"
+    },
+    {
+      "name": "Procurement",
+      "category": "Operations",
+      "proficiency": "Intermediate",
+      "id": "r81k08c5q"
+    },
+    {
+      "name": "Recruiting",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "4agk67cxp"
+    },
+    {
+      "name": "Talent Acquisition",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "ysoa67j6z"
+    },
+    {
+      "name": "Employee Relations",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "rmy2tcf1c"
+    },
+    {
+      "name": "Performance Management",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "9z0o743e0"
+    },
+    {
+      "name": "Compensation and Benefits",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "m7q0utrdi"
+    },
+    {
+      "name": "Training and Development",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "g4q89nban"
+    },
+    {
+      "name": "HR Compliance",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "wt1al5isi"
+    },
+    {
+      "name": "HRIS Management",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "ytq286lza"
+    },
+    {
+      "name": "Workforce Planning",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "pwzuqi33j"
+    },
+    {
+      "name": "Employee Engagement",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "sey4e4ilr"
+    },
+    {
+      "name": "Diversity and Inclusion",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "q8c7yqs8n"
+    },
+    {
+      "name": "Succession Planning",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "npwiom9st"
+    },
+    {
+      "name": "Organizational Development",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "it1o9m8kl"
+    },
+    {
+      "name": "Change Management",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "yp1d1eul8"
+    },
+    {
+      "name": "Conflict Resolution",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "otjv8egb1"
+    },
+    {
+      "name": "Leadership Development",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "zbegh12u4"
+    },
+    {
+      "name": "Executive Coaching",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "h49azlvmv"
+    },
+    {
+      "name": "Mentoring",
+      "category": "Human Resources",
+      "proficiency": "Intermediate",
+      "id": "akcgjxijs"
+    },
+    {
+      "name": "Financial Analysis",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "proodxglu"
+    },
+    {
+      "name": "Financial Modeling",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "3hajbto5n"
+    },
+    {
+      "name": "Accounting",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "4zypxphnt"
+    },
+    {
+      "name": "Bookkeeping",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "suez3l1qm"
+    },
+    {
+      "name": "Forecasting",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "8qclovsy2"
+    },
+    {
+      "name": "Budgeting",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "2em7naxms"
+    },
+    {
+      "name": "Valuation",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "s4ls6c4o9"
+    },
+    {
+      "name": "Investment Analysis",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "345nw4mq9"
+    },
+    {
+      "name": "Tax Preparation",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "vx9k9x0wo"
+    },
+    {
+      "name": "QuickBooks",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "evp0733vc"
+    },
+    {
+      "name": "Oracle Financials",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "jpkyvpkqm"
+    },
+    {
+      "name": "SAP",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "nmnerou22"
+    },
+    {
+      "name": "Business Analysis",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "dhc99o6cm"
+    },
+    {
+      "name": "Process Improvement",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "stxano0l8"
+    },
+    {
+      "name": "Strategic Planning",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "0znpitil9"
+    },
+    {
+      "name": "Market Research",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "kfi7i46sf"
+    },
+    {
+      "name": "Competitive Analysis",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "60unwilii"
+    },
+    {
+      "name": "Business Development",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "qk81aykrk"
+    },
+    {
+      "name": "Sales Strategy",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "yamfg8fow"
+    },
+    {
+      "name": "Customer Relationship Management",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "orh30gmeg"
+    },
+    {
+      "name": "Salesforce",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "dfli2mq00"
+    },
+    {
+      "name": "HubSpot",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "28fhv9ziy"
+    },
+    {
+      "name": "Contract Negotiation",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "0qxfdnc8t"
+    },
+    {
+      "name": "Procurement",
+      "category": "Business & Finance",
+      "proficiency": "Intermediate",
+      "id": "og1k2odzr"
+    },
+    {
+      "name": "Copywriting",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "xt7fk7kfe"
+    },
+    {
+      "name": "Content Writing",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "ybq1h8y84"
+    },
+    {
+      "name": "Article Writing",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "kv401kh0f"
+    },
+    {
+      "name": "Technical Writing",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "fa9rohi2p"
+    },
+    {
+      "name": "Ghostwriting",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "tkw83cmqr"
+    },
+    {
+      "name": "Blog Writing",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "bzim4uk1a"
+    },
+    {
+      "name": "Editing",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "jg54s4pcb"
+    },
+    {
+      "name": "Proofreading",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "7hl6z4nij"
+    },
+    {
+      "name": "Scriptwriting",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "iw53d7c2g"
+    },
+    {
+      "name": "Storytelling",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "l2miot5zr"
+    },
+    {
+      "name": "Video Production",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "uvcj02n4l"
+    },
+    {
+      "name": "Video Editing",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "et5u1ojlx"
+    },
+    {
+      "name": "Podcast Production",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "rryaqluu7"
+    },
+    {
+      "name": "Audio Editing",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "cxlckthrb"
+    },
+    {
+      "name": "Voice Over",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "thgz62tt0"
+    },
+    {
+      "name": "Translation",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "a5z7uwrub"
+    },
+    {
+      "name": "Localization",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "j2rggkhv1"
+    },
+    {
+      "name": "Photography",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "l9m9th478"
+    },
+    {
+      "name": "Videography",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "cy2ybqyw4"
+    },
+    {
+      "name": "Adobe Premiere Pro",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "hbttqkjte"
+    },
+    {
+      "name": "Final Cut Pro",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "hkatz8jnc"
+    },
+    {
+      "name": "Adobe After Effects",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "1by041w9q"
+    },
+    {
+      "name": "Audacity",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "eg7ewza5t"
+    },
+    {
+      "name": "Transcription",
+      "category": "Content Creation",
+      "proficiency": "Intermediate",
+      "id": "hmhd0lcv6"
+    },
+    {
+      "name": "Agile Methodology",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "d3f45z0ss"
+    },
+    {
+      "name": "Scrum",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "slevkgf4x"
+    },
+    {
+      "name": "Kanban",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "71i49y0jb"
+    },
+    {
+      "name": "Six Sigma",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "gsiwhg3n1"
+    },
+    {
+      "name": "Lean",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "52ogpvl3c"
+    },
+    {
+      "name": "Waterfall Method",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "xstgomkfx"
+    },
+    {
+      "name": "PMI/PMBOK",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "anubfttn2"
+    },
+    {
+      "name": "Prince2",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "gxshdsdq0"
+    },
+    {
+      "name": "Project Planning",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "8btiun2z1"
+    },
+    {
+      "name": "Project Scheduling",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "yu5xcybbr"
+    },
+    {
+      "name": "Risk Management",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "3ig8uazgj"
+    },
+    {
+      "name": "Resource Allocation",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "zg8g2na0d"
+    },
+    {
+      "name": "Stakeholder Management",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "52z6bntj7"
+    },
+    {
+      "name": "Budget Management",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "8hrpponke"
+    },
+    {
+      "name": "JIRA",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "44olca47p"
+    },
+    {
+      "name": "Asana",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "zfnia42iq"
+    },
+    {
+      "name": "Trello",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "v3gs25k7s"
+    },
+    {
+      "name": "MS Project",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "gwia7y2cd"
+    },
+    {
+      "name": "Monday.com",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "m2dvgogn8"
+    },
+    {
+      "name": "Basecamp",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "24plrrfeo"
+    },
+    {
+      "name": "Gantt Charts",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "apw5l2ivu"
+    },
+    {
+      "name": "Product Roadmapping",
+      "category": "Project Management",
+      "proficiency": "Intermediate",
+      "id": "ou8u0h79r"
+    },
+    {
+      "name": "SEO",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "eismn9wbw"
+    },
+    {
+      "name": "SEM",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "3esa1o7wi"
+    },
+    {
+      "name": "Email Marketing",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "nht1daqe5"
+    },
+    {
+      "name": "Social Media Marketing",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "oiid7jk01"
+    },
+    {
+      "name": "Content Marketing",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "8ye1akyja"
+    },
+    {
+      "name": "Influencer Marketing",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "5ntrjwuvr"
+    },
+    {
+      "name": "Affiliate Marketing",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "apbksnh6c"
+    },
+    {
+      "name": "PPC Advertising",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "g2djvvdej"
+    },
+    {
+      "name": "Google Ads",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "hnf6cmcvi"
+    },
+    {
+      "name": "Facebook Ads",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "cqqjr485s"
+    },
+    {
+      "name": "Instagram Ads",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "fj7rtcax8"
+    },
+    {
+      "name": "LinkedIn Ads",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "652jscjtl"
+    },
+    {
+      "name": "Marketing Analytics",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "679r6h84z"
+    },
+    {
+      "name": "Marketing Automation",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "4o1ztan8d"
+    },
+    {
+      "name": "Marketing Strategy",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "3h1xhzgor"
+    },
+    {
+      "name": "Brand Management",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "ltejf1sjo"
+    },
+    {
+      "name": "Conversion Optimization",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "2y05ui2gv"
+    },
+    {
+      "name": "A/B Testing",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "1108hysas"
+    },
+    {
+      "name": "Customer Acquisition",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "vnhoaex6x"
+    },
+    {
+      "name": "Growth Hacking",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "4cj1piczs"
+    },
+    {
+      "name": "User Acquisition",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "zwpili2aw"
+    },
+    {
+      "name": "Google Analytics",
+      "category": "Digital Marketing",
+      "proficiency": "Intermediate",
+      "id": "mqduuvc31"
+    },
+    {
+      "name": "UI Design",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "0sgdbezh2"
+    },
+    {
+      "name": "UX Design",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "238u6r92y"
+    },
+    {
+      "name": "Graphic Design",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "iy2wivmcg"
+    },
+    {
+      "name": "Visual Design",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "nrwtb4p02"
+    },
+    {
+      "name": "Web Design",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "76z0da7ft"
+    },
+    {
+      "name": "Mobile Design",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "oep60gw68"
+    },
+    {
+      "name": "Product Design",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "btr6pimca"
+    },
+    {
+      "name": "Interaction Design",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "0pp1h0oix"
+    },
+    {
+      "name": "Information Architecture",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "cdcndezva"
+    },
+    {
+      "name": "Wireframing",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "uoxcg256w"
+    },
+    {
+      "name": "Prototyping",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "o1px91wyg"
+    },
+    {
+      "name": "Adobe Photoshop",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "2mitif6cg"
+    },
+    {
+      "name": "Adobe Illustrator",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "cv8966xt1"
+    },
+    {
+      "name": "Adobe XD",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "sg3p95e60"
+    },
+    {
+      "name": "Sketch",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "r16x77vmz"
+    },
+    {
+      "name": "Figma",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "64m0vcv6p"
+    },
+    {
+      "name": "InVision",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "42anjqqgb"
+    },
+    {
+      "name": "Brand Identity Design",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "q9mpr20w7"
+    },
+    {
+      "name": "Logo Design",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "cgup678os"
+    },
+    {
+      "name": "Typography",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "nzeiy4xk1"
+    },
+    {
+      "name": "Color Theory",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "ff2gkhrkm"
+    },
+    {
+      "name": "Design Systems",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "4er3b6yi5"
+    },
+    {
+      "name": "Motion Graphics",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "5maf7ax1v"
+    },
+    {
+      "name": "3D Modeling",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "gaqhtj1o8"
+    },
+    {
+      "name": "Animation",
+      "category": "Design",
+      "proficiency": "Intermediate",
+      "id": "o66huj2c8"
+    },
+    {
+      "name": "Network Security",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "k40pll99w"
+    },
+    {
+      "name": "Application Security",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "ygg357txx"
+    },
+    {
+      "name": "Vulnerability Assessment",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "f43f79qp6"
+    },
+    {
+      "name": "Information Security",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "4bhuui6dq"
+    },
+    {
+      "name": "Security Architecture",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "gnwff3wga"
+    },
+    {
+      "name": "Penetration Testing",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "i24ui2mcl"
+    },
+    {
+      "name": "Ethical Hacking",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "taznfzudq"
+    },
+    {
+      "name": "Security Auditing",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "3tw91o2ff"
+    },
+    {
+      "name": "Compliance",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "uuntcylkv"
+    },
+    {
+      "name": "Risk Management",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "3w48aow9d"
+    },
+    {
+      "name": "Encryption",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "3xjb411g8"
+    },
+    {
+      "name": "Identity and Access Management",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "gcvt023fa"
+    },
+    {
+      "name": "Firewall Management",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "k5536tdc6"
+    },
+    {
+      "name": "SIEM",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "p1tsql1rv"
+    },
+    {
+      "name": "Incident Response",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "wotirja8k"
+    },
+    {
+      "name": "Disaster Recovery",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "e2af2wt1q"
+    },
+    {
+      "name": "Business Continuity",
+      "category": "Cybersecurity",
+      "proficiency": "Intermediate",
+      "id": "q4uexsop6"
+    },
+    {
+      "name": "AWS",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "vd7ctu0pe"
+    },
+    {
+      "name": "IBM Cloud",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "jll4ee39l"
+    },
+    {
+      "name": "Google Cloud",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "duhiq3rx5"
+    },
+    {
+      "name": "Azure",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "nj12zlul5"
+    },
+    {
+      "name": "Oracle Cloud",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "o0sq4oryl"
+    },
+    {
+      "name": "Cloud Architecture",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "8swl3lvhj"
+    },
+    {
+      "name": "Cloud Migration",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "4hlmq5kfo"
+    },
+    {
+      "name": "Serverless Computing",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "ud8anc3i3"
+    },
+    {
+      "name": "Docker",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "uva24xl0z"
+    },
+    {
+      "name": "Kubernetes",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "5ydd56nqi"
+    },
+    {
+      "name": "Containerization",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "ux1qx0cny"
+    },
+    {
+      "name": "Infrastructure as Code",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "e7zqqt3tc"
+    },
+    {
+      "name": "Terraform",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "0nokuwhkc"
+    },
+    {
+      "name": "CloudFormation",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "oejiweaxj"
+    },
+    {
+      "name": "Ansible",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "wz8fsod2y"
+    },
+    {
+      "name": "Puppet",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "5m5uw2xfb"
+    },
+    {
+      "name": "Chef",
+      "category": "Cloud Computing",
+      "proficiency": "Intermediate",
+      "id": "4ze31vril"
+    },
+    {
+      "name": "Data Analysis",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "e8atk5yz6"
+    },
+    {
+      "name": "Statistical Analysis",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "kuo1tcbag"
+    },
+    {
+      "name": "Data Visualization",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "f3xgsn2xu"
+    },
+    {
+      "name": "Machine Learning",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "d3cbysw81"
+    },
+    {
+      "name": "Natural Language Processing",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "oehh1pcxr"
+    },
+    {
+      "name": "Deep Learning",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "lbhlhygtu"
+    },
+    {
+      "name": "Computer Vision",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "jqr9pqzl0"
+    },
+    {
+      "name": "Predictive Modeling",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "31fpzqkcm"
+    },
+    {
+      "name": "Data Mining",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "iristmczf"
+    },
+    {
+      "name": "Big Data",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "s3cfw93vu"
+    },
+    {
+      "name": "R Programming",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "a7e55xf23"
+    },
+    {
+      "name": "SQL",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "a8cwjdtpj"
+    },
+    {
+      "name": "NoSQL",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "c12g1kj8m"
+    },
+    {
+      "name": "MongoDB",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "ueokl74mq"
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "lj7azgy83"
+    },
+    {
+      "name": "MySQL",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "cqk0xn2z4"
+    },
+    {
+      "name": "Oracle",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "ahudsbqd7"
+    },
+    {
+      "name": "Data Warehousing",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "6p036y609"
+    },
+    {
+      "name": "ETL",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "goiweujri"
+    },
+    {
+      "name": "Business Intelligence",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "89hxldvg5"
+    },
+    {
+      "name": "Tableau",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "wwpacqi40"
+    },
+    {
+      "name": "Power BI",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "p013e2w1f"
+    },
+    {
+      "name": "Looker",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "9yrr59chr"
+    },
+    {
+      "name": "Data Engineering",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "9sk5y6czd"
+    },
+    {
+      "name": "TensorFlow",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "qjovp4wo8"
+    },
+    {
+      "name": "PyTorch",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "xtd9ic74d"
+    },
+    {
+      "name": "scikit-learn",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "4rk8ayw09"
+    },
+    {
+      "name": "Pandas",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "ovqwce6ry"
+    },
+    {
+      "name": "NumPy",
+      "category": "Data Science & Analytics",
+      "proficiency": "Intermediate",
+      "id": "en7wz36dm"
+    },
+    {
+      "name": "JavaScript",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "67jviu84v"
+    },
+    {
+      "name": "Python",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "41npdwcjb"
+    },
+    {
+      "name": "Java",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "tvsjo34ja"
+    },
+    {
+      "name": "C++",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "vtguifsrb"
+    },
+    {
+      "name": "C#",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "kebzkqxjf"
+    },
+    {
+      "name": "Ruby",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "cdhwxp0pi"
+    },
+    {
+      "name": "PHP",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "cmtd6uipm"
+    },
+    {
+      "name": "Swift",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "9qxw8aakv"
+    },
+    {
+      "name": "Kotlin",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "t4qcvj5to"
+    },
+    {
+      "name": "TypeScript",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "b5aszikff"
+    },
+    {
+      "name": "React",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "4xhcrh0mr"
+    },
+    {
+      "name": "Angular",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "djufas75k"
+    },
+    {
+      "name": "Vue.js",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "c702qhalf"
+    },
+    {
+      "name": "Node.js",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "xn0o2fnei"
+    },
+    {
+      "name": "Django",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "4v02j320o"
+    },
+    {
+      "name": "Ruby on Rails",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "02p2qgefm"
+    },
+    {
+      "name": "Laravel",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "1uubdv85l"
+    },
+    {
+      "name": "Spring Boot",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "wt9yo65s9"
+    },
+    {
+      "name": "ASP.NET",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "3olzkcyui"
+    },
+    {
+      "name": "Flutter",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "4et7gqzbe"
+    },
+    {
+      "name": "Xamarin",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "rw66wia9l"
+    },
+    {
+      "name": "Mobile App Development",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "bwu48vtcb"
+    },
+    {
+      "name": "Web Development",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "iexgyara4"
+    },
+    {
+      "name": "Full",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "p7qv1g4a3"
+    },
+    {
+      "name": "Stack Development",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "x2rdiewih"
+    },
+    {
+      "name": "Front",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "h5kh6aqly"
+    },
+    {
+      "name": "End Development",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "10yqagt1w"
+    },
+    {
+      "name": "Back",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "la1p1rvuf"
+    },
+    {
+      "name": "End Development",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "9jv2x2f2h"
+    },
+    {
+      "name": "API Development",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "4lr1g1ky1"
+    },
+    {
+      "name": "Microservices",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "s2lkgpvdn"
+    },
+    {
+      "name": "Serverless Architecture",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "5v3lc6k9s"
+    },
+    {
+      "name": "DevOps",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "3iat9xv63"
+    },
+    {
+      "name": "CI/CD",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "qm3yr9kz5"
+    },
+    {
+      "name": "Test Automation",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "e1yunlb7p"
+    },
+    {
+      "name": "Unit Testing",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "fm86esolw"
+    },
+    {
+      "name": "Performance Testing",
+      "category": "Software Development",
+      "proficiency": "Intermediate",
+      "id": "a55r8s5in"
+    }
+  ]
+}

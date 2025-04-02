@@ -1,5 +1,5 @@
 import { Skill } from '@/types';
-import Link from 'next/link';
+import { Badge } from "@/components/ui/badge";
 
 interface SkillsTableProps {
   skills: Skill[];
@@ -25,25 +25,14 @@ export function SkillsTable({ skills }: SkillsTableProps) {
           <div className="px-4 py-5 sm:p-6">
             <h3 className="text-lg font-medium leading-6 text-gray-900">{category}</h3>
             <div className="mt-4">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="flex flex-wrap gap-1.5">
                 {groupedSkills[category].map((skill) => (
-                  <div
+                  <span
                     key={skill.id}
-                    className="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm hover:border-gray-400"
+                    className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"
                   >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-sm font-medium text-gray-900">{skill.name}</h3>
-                        <p className="mt-1 text-sm text-gray-500">Proficiency: {skill.proficiency}</p>
-                      </div>
-                      <Link
-                        href={`/skills/${skill.id}`}
-                        className="text-indigo-600 hover:text-indigo-900"
-                      >
-                        View
-                      </Link>
-                    </div>
-                  </div>
+                    {skill.name}
+                  </span>
                 ))}
               </div>
             </div>

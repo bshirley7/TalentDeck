@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { Skill } from '@/types';
 
 const skillSchema = z.object({
+  id: z.string().optional(),
   name: z.string().min(1),
   category: z.string().min(1),
   proficiency: z.enum(['Beginner', 'Intermediate', 'Advanced', 'Expert']),
@@ -11,9 +12,11 @@ const skillSchema = z.object({
 
 export async function GET() {
   try {
-    const skills = store.getSkills();
+    const dataStore = await store;
+    const skills = await dataStore.getSkills();
     return NextResponse.json(skills);
   } catch (error) {
+    console.error('Error fetching skills:', error);
     return NextResponse.json(
       { error: 'Failed to fetch skills' },
       { status: 500 }
@@ -26,7 +29,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = skillSchema.parse(body);
 
-    const newSkill = store.addSkill(validatedData);
+    const dataStore = await store;
+    const newSkill = await dataStore.addSkill(validatedData);
     return NextResponse.json(newSkill);
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -47,8 +51,9 @@ export async function PUT(request: NextRequest) {
     const body = await request.json();
     const validatedData = skillSchema.parse(body);
 
-    const data = await getSkillsData();
-    const skillIndex = data.skills.findIndex((s) => s.id === validatedData.id);
+    const dataStore = await store;
+    const skills = await dataStore.getSkills();
+    const skillIndex = skills.findIndex((s: Skill) => s.id === validatedData.id);
 
     if (skillIndex === -1) {
       return NextResponse.json(
@@ -57,10 +62,8 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    data.skills[skillIndex] = validatedData;
-    await saveSkillsData(data);
-
-    return NextResponse.json(validatedData);
+    const updatedSkill = await dataStore.addSkill(validatedData);
+    return NextResponse.json(updatedSkill);
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -87,18 +90,15 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    const data = await getSkillsData();
-    const skillIndex = data.skills.findIndex((s) => s.id === id);
+    const dataStore = await store;
+    const success = await dataStore.deleteSkill(id);
 
-    if (skillIndex === -1) {
+    if (!success) {
       return NextResponse.json(
         { error: 'Skill not found' },
         { status: 404 }
       );
     }
-
-    data.skills.splice(skillIndex, 1);
-    await saveSkillsData(data);
 
     return NextResponse.json({ message: 'Skill deleted successfully' });
   } catch (error) {

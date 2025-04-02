@@ -7,6 +7,7 @@ const profileSchema = z.object({
   name: z.string().min(1),
   department: z.string().min(1),
   title: z.string().min(1),
+  hourlyRate: z.number().min(0).optional(),
   contact: z.object({
     email: z.string().email(),
     phone: z.string().min(1),

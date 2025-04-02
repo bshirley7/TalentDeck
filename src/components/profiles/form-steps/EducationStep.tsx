@@ -1,246 +1,225 @@
 'use client';
 
 import * as React from 'react';
-import { UseFormReturn, useFieldArray } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import { TalentProfileFormData } from '@/lib/validation';
-import { Plus, Trash2 } from 'lucide-react';
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 interface EducationStepProps {
   form: UseFormReturn<TalentProfileFormData>;
   onSubmit: () => void;
   onPrev: () => void;
-  isLoading?: boolean;
+  isLoading: boolean;
 }
 
-export function EducationStep({
-  form,
-  onSubmit,
-  onPrev,
-  isLoading = false,
-}: EducationStepProps) {
-  const {
-    fields: educationFields,
-    append: appendEducation,
-    remove: removeEducation,
-  } = useFieldArray({
-    control: form.control,
-    name: 'education',
-  });
+export function EducationStep({ form, onSubmit, onPrev, isLoading }: EducationStepProps) {
+  const { register, watch, setValue, formState: { errors } } = form;
+  const education = watch('education') || [];
+  const certifications = watch('certifications') || [];
 
-  const {
-    fields: certificationFields,
-    append: appendCertification,
-    remove: removeCertification,
-  } = useFieldArray({
-    control: form.control,
-    name: 'certifications',
-  });
+  const handleAddEducation = () => {
+    const newEducation = {
+      institution: '',
+      degree: '',
+      field: '',
+      startDate: '',
+      endDate: '',
+    };
+    setValue('education', [...education, newEducation]);
+  };
+
+  const handleRemoveEducation = (index: number) => {
+    const updatedEducation = education.filter((_, i) => i !== index);
+    setValue('education', updatedEducation);
+  };
+
+  const handleAddCertification = () => {
+    const newCertification = {
+      name: '',
+      issuer: '',
+      date: '',
+    };
+    setValue('certifications', [...certifications, newCertification]);
+  };
+
+  const handleRemoveCertification = (index: number) => {
+    const updatedCertifications = certifications.filter((_, i) => i !== index);
+    setValue('certifications', updatedCertifications);
+  };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-medium">Education</h3>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() =>
-                appendEducation({
-                  institution: '',
-                  degree: '',
-                  field: '',
-                  year: '',
-                })
-              }
-            >
-              <Plus className="mr-2 h-4 w-4" />
+    <div className="space-y-6">
+      <div className="space-y-4">
+        <div>
+          <div className="flex justify-between items-center">
+            <Label>Education</Label>
+            <Button type="button" variant="outline" onClick={handleAddEducation}>
               Add Education
             </Button>
           </div>
 
-          {educationFields.map((field, index) => (
-            <div key={field.id} className="space-y-4 rounded-lg border p-4">
-              <div className="flex items-center justify-between">
-                <h4 className="text-sm font-medium">Education {index + 1}</h4>
+          {education.map((edu, index) => (
+            <div key={index} className="mt-4 space-y-4 p-4 border rounded-lg">
+              <div className="flex justify-between items-center">
+                <h4 className="font-medium">Education {index + 1}</h4>
                 <Button
                   type="button"
                   variant="ghost"
-                  size="sm"
-                  onClick={() => removeEducation(index)}
+                  onClick={() => handleRemoveEducation(index)}
                 >
-                  <Trash2 className="h-4 w-4" />
+                  Remove
                 </Button>
               </div>
 
-              <FormField
-                control={form.control}
-                name={`education.${index}.institution`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Institution</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter institution name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor={`institution-${index}`}>Institution</Label>
+                  <Input
+                    id={`institution-${index}`}
+                    {...register(`education.${index}.institution`)}
+                  />
+                  {errors.education?.[index]?.institution && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.education[index].institution?.message}
+                    </p>
+                  )}
+                </div>
 
-              <FormField
-                control={form.control}
-                name={`education.${index}.degree`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Degree</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter degree" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <div>
+                  <Label htmlFor={`degree-${index}`}>Degree</Label>
+                  <Input
+                    id={`degree-${index}`}
+                    {...register(`education.${index}.degree`)}
+                  />
+                  {errors.education?.[index]?.degree && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.education[index].degree?.message}
+                    </p>
+                  )}
+                </div>
 
-              <FormField
-                control={form.control}
-                name={`education.${index}.field`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Field of Study</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter field of study" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <div>
+                  <Label htmlFor={`field-${index}`}>Field of Study</Label>
+                  <Input
+                    id={`field-${index}`}
+                    {...register(`education.${index}.field`)}
+                  />
+                  {errors.education?.[index]?.field && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.education[index].field?.message}
+                    </p>
+                  )}
+                </div>
 
-              <FormField
-                control={form.control}
-                name={`education.${index}.year`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Year</FormLabel>
-                    <FormControl>
-                      <Input type="number" placeholder="Enter year" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <div>
+                  <Label htmlFor={`startDate-${index}`}>Start Date</Label>
+                  <Input
+                    id={`startDate-${index}`}
+                    type="date"
+                    {...register(`education.${index}.startDate`)}
+                  />
+                  {errors.education?.[index]?.startDate && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.education[index].startDate?.message}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <Label htmlFor={`endDate-${index}`}>End Date</Label>
+                  <Input
+                    id={`endDate-${index}`}
+                    type="date"
+                    {...register(`education.${index}.endDate`)}
+                  />
+                  {errors.education?.[index]?.endDate && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.education[index].endDate?.message}
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-medium">Certifications</h3>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() =>
-                appendCertification({
-                  name: '',
-                  issuer: '',
-                  year: '',
-                })
-              }
-            >
-              <Plus className="mr-2 h-4 w-4" />
+        <div>
+          <div className="flex justify-between items-center">
+            <Label>Certifications</Label>
+            <Button type="button" variant="outline" onClick={handleAddCertification}>
               Add Certification
             </Button>
           </div>
 
-          {certificationFields.map((field, index) => (
-            <div key={field.id} className="space-y-4 rounded-lg border p-4">
-              <div className="flex items-center justify-between">
-                <h4 className="text-sm font-medium">
-                  Certification {index + 1}
-                </h4>
+          {certifications.map((cert, index) => (
+            <div key={index} className="mt-4 space-y-4 p-4 border rounded-lg">
+              <div className="flex justify-between items-center">
+                <h4 className="font-medium">Certification {index + 1}</h4>
                 <Button
                   type="button"
                   variant="ghost"
-                  size="sm"
-                  onClick={() => removeCertification(index)}
+                  onClick={() => handleRemoveCertification(index)}
                 >
-                  <Trash2 className="h-4 w-4" />
+                  Remove
                 </Button>
               </div>
 
-              <FormField
-                control={form.control}
-                name={`certifications.${index}.name`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Certification Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter certification name"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <Label htmlFor={`certName-${index}`}>Name</Label>
+                  <Input
+                    id={`certName-${index}`}
+                    {...register(`certifications.${index}.name`)}
+                  />
+                  {errors.certifications?.[index]?.name && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.certifications[index].name?.message}
+                    </p>
+                  )}
+                </div>
 
-              <FormField
-                control={form.control}
-                name={`certifications.${index}.issuer`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Issuer</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter issuer" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <div>
+                  <Label htmlFor={`issuer-${index}`}>Issuer</Label>
+                  <Input
+                    id={`issuer-${index}`}
+                    {...register(`certifications.${index}.issuer`)}
+                  />
+                  {errors.certifications?.[index]?.issuer && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.certifications[index].issuer?.message}
+                    </p>
+                  )}
+                </div>
 
-              <FormField
-                control={form.control}
-                name={`certifications.${index}.year`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Year</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="Enter year"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <div>
+                  <Label htmlFor={`certDate-${index}`}>Date</Label>
+                  <Input
+                    id={`certDate-${index}`}
+                    type="date"
+                    {...register(`certifications.${index}.date`)}
+                  />
+                  {errors.certifications?.[index]?.date && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.certifications[index].date?.message}
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
         </div>
+      </div>
 
-        <div className="flex justify-between">
-          <Button type="button" variant="outline" onClick={onPrev}>
-            Previous
-          </Button>
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? 'Creating Profile...' : 'Create Profile'}
-          </Button>
-        </div>
-      </form>
-    </Form>
+      <div className="flex justify-between">
+        <Button variant="outline" onClick={onPrev}>
+          Previous
+        </Button>
+        <Button onClick={onSubmit} disabled={isLoading}>
+          {isLoading ? 'Creating Profile...' : 'Create Profile'}
+        </Button>
+      </div>
+    </div>
   );
 } 

@@ -5,47 +5,69 @@ import { TalentProfile, Skill } from '@/types';
 
 // Profile actions
 export async function getAllProfiles() {
-  return store.getProfiles();
+  const dataStore = await store;
+  return dataStore.getProfiles();
 }
 
 export async function getProfile(id: string) {
-  return store.getProfile(id);
+  const dataStore = await store;
+  return dataStore.getProfile(id);
 }
 
 export async function addProfile(profile: Omit<TalentProfile, 'id'>) {
-  return store.addProfile(profile);
+  const dataStore = await store;
+  return dataStore.addProfile(profile);
 }
 
 export async function updateProfile(id: string, profile: Partial<TalentProfile>) {
-  return store.updateProfile(id, profile);
+  const dataStore = await store;
+  return dataStore.updateProfile(id, profile);
 }
 
 export async function deleteProfile(id: string) {
-  return store.deleteProfile(id);
+  const dataStore = await store;
+  return dataStore.deleteProfile(id);
 }
 
 // Skills actions
 export async function getAllSkills() {
-  const skills = store.getSkills();
-  if (skills.length === 0) {
-    // If no skills exist, load them from SKILLS.md
-    const { parseSkillsMarkdown } = await import('./utils/skillsLoader');
-    const defaultSkills = parseSkillsMarkdown();
-    defaultSkills.forEach(skill => store.addSkill(skill));
-    return store.getSkills();
-  }
-  return skills;
+  const dataStore = await store;
+  return dataStore.getSkills();
 }
 
 export async function addSkill(skill: Omit<Skill, 'id'>) {
-  return store.addSkill(skill);
+  const dataStore = await store;
+  return dataStore.addSkill(skill);
 }
 
 export async function deleteSkill(id: string) {
-  return store.deleteSkill(id);
+  const dataStore = await store;
+  return dataStore.deleteSkill(id);
 }
 
-// Search action
+// Category actions
+export async function getAllCategories() {
+  const dataStore = await store;
+  return dataStore.getCategories();
+}
+
+export async function addCategory(category: string) {
+  const dataStore = await store;
+  return dataStore.addCategory(category);
+}
+
+export async function deleteCategory(category: string) {
+  const dataStore = await store;
+  return dataStore.deleteCategory(category);
+}
+
+export async function updateCategory(oldName: string, newName: string) {
+  const dataStore = await store;
+  return dataStore.updateCategory(oldName, newName);
+}
+
+// Search actions
 export async function searchProfiles(query: string) {
-  return store.searchProfiles(query);
+  const dataStore = await store;
+  return dataStore.searchProfiles(query);
 } 

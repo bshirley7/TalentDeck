@@ -9,12 +9,12 @@ const categorySchema = z.object({
 
 export async function GET() {
   try {
-    const skills = store.getSkills();
-    const categories = Array.from(new Set(skills.map(skill => skill.category)));
+    const categories = store.getCategories();
     return NextResponse.json(categories);
   } catch (error) {
+    console.error('Error fetching categories:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch categories' },
+      { error: 'Failed to fetch categories', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }
@@ -23,26 +23,24 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name } = body;
-
-    if (!name) {
+    const validatedData = categorySchema.parse(body);
+    
+    const success = store.addCategory(validatedData.name);
+    if (!success) {
       return NextResponse.json(
-        { error: 'Category name is required' },
+        { error: 'Category already exists' },
         { status: 400 }
       );
     }
 
-    // Add a new skill with the category to persist it
-    const newSkill = store.addSkill({
-      name: `Category: ${name}`, // Temporary skill to persist category
-      category: name,
-      proficiency: 'Intermediate',
+    return NextResponse.json({ 
+      message: 'Category added successfully',
+      category: validatedData.name
     });
-
-    return NextResponse.json({ category: name });
   } catch (error) {
+    console.error('Error adding category:', error);
     return NextResponse.json(
-      { error: 'Failed to create category' },
+      { error: 'Failed to add category', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }
@@ -62,9 +60,8 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const data = await getSkillsData();
-    const categories = Array.from(new Set(data.skills.map(skill => skill.category)));
-
+    // Check if old category exists
+    const categories = store.getCategories();
     if (!categories.includes(oldName)) {
       return NextResponse.json(
         { error: 'Category not found' },
@@ -72,6 +69,7 @@ export async function PUT(request: NextRequest) {
       );
     }
 
+    // Check if new name already exists
     if (categories.includes(validatedData.name) && oldName !== validatedData.name) {
       return NextResponse.json(
         { error: 'New category name already exists' },
@@ -79,29 +77,24 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    // Update all skills with this category
-    data.skills = data.skills.map(skill => {
-      if (skill.category === oldName) {
-        return {
-          ...skill,
-          category: validatedData.name,
-          name: skill.name === oldName ? validatedData.name : skill.name,
-        };
-      }
-      return skill;
-    });
-
-    await saveSkillsData(data);
-    return NextResponse.json(validatedData);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
+    // Update the category name
+    const success = store.updateCategory(oldName, validatedData.name);
+    if (!success) {
       return NextResponse.json(
-        { error: 'Invalid category data', details: error.errors },
-        { status: 400 }
+        { error: 'Failed to update category' },
+        { status: 500 }
       );
     }
+
+    return NextResponse.json({ 
+      message: 'Category updated successfully',
+      oldName,
+      newName: validatedData.name
+    });
+  } catch (error) {
+    console.error('Error updating category:', error);
     return NextResponse.json(
-      { error: 'Failed to update category' },
+      { error: 'Failed to update category', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }
@@ -122,15 +115,19 @@ export async function DELETE(request: NextRequest) {
     const success = store.deleteCategory(category);
     if (!success) {
       return NextResponse.json(
-        { error: 'Category not found or has associated skills' },
+        { error: 'Category not found or could not be deleted' },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ 
+      message: 'Category deleted successfully',
+      category
+    });
   } catch (error) {
+    console.error('Error deleting category:', error);
     return NextResponse.json(
-      { error: 'Failed to delete category' },
+      { error: 'Failed to delete category', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }

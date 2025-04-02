@@ -1,4 +1,5 @@
 import { DataStore, TalentProfile, SkillsDirectory } from '@/types';
+import { TalentProfileFormData } from './validation';
 
 // API endpoints
 const API_BASE = typeof window !== 'undefined' 
@@ -22,17 +23,19 @@ export async function getProfile(id: string): Promise<TalentProfile> {
   return response.json();
 }
 
-export async function addProfile(profile: Omit<TalentProfile, 'id'>): Promise<TalentProfile> {
-  const response = await fetch(`${API_BASE}/profiles`, {
+export async function addProfile(profile: TalentProfileFormData): Promise<TalentProfile> {
+  const response = await fetch('/api/profiles', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(profile),
   });
+
   if (!response.ok) {
-    throw new Error('Failed to add profile');
+    throw new Error('Failed to create profile');
   }
+
   return response.json();
 }
 

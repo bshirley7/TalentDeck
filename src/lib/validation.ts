@@ -21,10 +21,9 @@ export const contactInfoSchema = z.object({
 });
 
 export const skillSchema = z.object({
-  id: z.string(),
+  id: z.string().optional(),
   name: z.string().min(1),
   category: z.string().min(1),
-  proficiency: z.enum(['Beginner', 'Intermediate', 'Advanced', 'Expert']),
 });
 
 export const availabilitySchema = z.object({
@@ -33,14 +32,44 @@ export const availabilitySchema = z.object({
   notes: z.string().optional(),
 });
 
-export const talentProfileSchema = z.object({
-  id: z.string(),
-  name: z.string().min(1),
-  department: z.string().min(1),
-  title: z.string().min(1),
-  contact: contactInfoSchema,
+// Form validation schema (more flexible)
+export const talentProfileFormSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  title: z.string().min(1, 'Title is required'),
+  department: z.string().min(1, 'Department is required'),
+  contact: z.object({
+    email: z.string().email('Invalid email address'),
+    phone: z.string().min(10, 'Phone number must be at least 10 digits'),
+    website: z.string().url('Invalid URL').optional(),
+    social: z.object({
+      linkedin: z.string().url('Invalid LinkedIn URL').optional(),
+      twitter: z.string().url('Invalid Twitter URL').optional(),
+      github: z.string().url('Invalid GitHub URL').optional(),
+      dribbble: z.string().url('Invalid Dribbble URL').optional(),
+    }).optional(),
+  }),
   skills: z.array(skillSchema),
   availability: availabilitySchema,
+  education: z.array(z.object({
+    institution: z.string(),
+    degree: z.string(),
+    field: z.string(),
+    startDate: z.string(),
+    endDate: z.string().optional(),
+    description: z.string().optional(),
+  })).optional(),
+  certifications: z.array(z.object({
+    name: z.string(),
+    issuer: z.string(),
+    date: z.string(),
+    description: z.string().optional(),
+  })).optional(),
 });
 
-export type TalentProfileFormData = z.infer<typeof talentProfileSchema>; 
+// API validation schema (stricter)
+export const talentProfileSchema = talentProfileFormSchema.extend({
+  id: z.string(),
+});
+
+export type TalentProfile = z.infer<typeof talentProfileSchema>;
+export type TalentProfileFormData = z.infer<typeof talentProfileFormSchema>; 

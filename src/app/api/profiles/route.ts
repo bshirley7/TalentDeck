@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getProfilesData, saveProfilesData } from '@/lib/server/data';
 import { z } from 'zod';
 import { TalentProfile } from '@/types';
+import { talentProfileSchema } from '@/lib/validation';
+import { store } from '@/lib/store';
+import { ZodError } from 'zod';
 
 const profileSchema = z.object({
   name: z.string().min(1),
@@ -33,9 +36,11 @@ const profileSchema = z.object({
 
 export async function GET() {
   try {
-    const data = await getProfilesData();
-    return NextResponse.json(data.profiles);
+    const dataStore = await store;
+    const profiles = await dataStore.getProfiles();
+    return NextResponse.json(profiles);
   } catch (error) {
+    console.error('Error fetching profiles:', error);
     return NextResponse.json(
       { error: 'Failed to fetch profiles' },
       { status: 500 }
@@ -43,30 +48,23 @@ export async function GET() {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const validatedData = profileSchema.parse(body);
-
-    const data = await getProfilesData();
-    const newProfile: TalentProfile = {
-      id: Math.random().toString(36).substr(2, 9),
-      ...validatedData,
-    };
-
-    data.profiles.push(newProfile);
-    await saveProfilesData(data);
-
-    return NextResponse.json(newProfile);
+    const validatedData = talentProfileSchema.parse(body);
+    const dataStore = await store;
+    const profile = await dataStore.addProfile(validatedData);
+    return NextResponse.json(profile, { status: 201 });
   } catch (error) {
-    if (error instanceof z.ZodError) {
+    console.error('Error creating profile:', error);
+    if (error instanceof ZodError) {
       return NextResponse.json(
         { error: 'Invalid profile data', details: error.errors },
         { status: 400 }
       );
     }
     return NextResponse.json(
-      { error: 'Failed to add profile' },
+      { error: 'Failed to create profile' },
       { status: 500 }
     );
   }

@@ -32,7 +32,6 @@ export function parseSkillsMarkdown(): Skill[] {
           id: generateSkillId(skillName),
           name: skillName,
           category: currentCategory,
-          proficiency: 'Intermediate', // Default proficiency level
         });
       }
     }

@@ -38,6 +38,12 @@ export function ProfileTable({ profiles }: ProfileTableProps) {
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
+                    Skills
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
                     Availability
                   </th>
                   <th
@@ -60,8 +66,40 @@ export function ProfileTable({ profiles }: ProfileTableProps) {
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {profile.title}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {profile.availability.status}
+                    <td className="px-3 py-4 text-sm text-gray-500">
+                      <div className="flex flex-wrap gap-1">
+                        {profile.skills.slice(0, 3).map((skill) => (
+                          <span
+                            key={skill.id}
+                            className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800"
+                          >
+                            {skill.name}
+                          </span>
+                        ))}
+                        {profile.skills.length > 3 && (
+                          <span className="text-xs text-gray-500">
+                            +{profile.skills.length - 3} more
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm">
+                      <span
+                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                          profile.availability.status === 'Available'
+                            ? 'bg-green-100 text-green-800'
+                            : profile.availability.status === 'Busy'
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : 'bg-red-100 text-red-800'
+                        }`}
+                      >
+                        {profile.availability.status}
+                      </span>
+                      {profile.availability.availableFrom && (
+                        <div className="mt-1 text-xs text-gray-500">
+                          From: {profile.availability.availableFrom}
+                        </div>
+                      )}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                       <Link

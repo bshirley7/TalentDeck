@@ -1,20 +1,21 @@
-import fs from 'fs';
+import { promises as fs } from 'fs';
 import path from 'path';
 import { DataStore, TalentProfile, Skill } from '@/types';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
-const PROFILES_FILE_PATH = path.join(DATA_DIR, 'profiles.json');
-const SKILLS_FILE_PATH = path.join(DATA_DIR, 'skills.json');
+const PROFILES_FILE = path.join(DATA_DIR, 'profiles.json');
+const SKILLS_FILE = path.join(DATA_DIR, 'skills.json');
+const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
 
 // Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+if (!fs.access(DATA_DIR, fs.constants.F_OK)) {
+  fs.mkdir(DATA_DIR, { recursive: true });
 }
 
 // Helper function to read JSON file
 async function readJsonFile<T>(filePath: string, defaultValue: T): Promise<T> {
   try {
-    const jsonData = await fs.promises.readFile(filePath, 'utf-8');
+    const jsonData = await fs.readFile(filePath, 'utf-8');
     return JSON.parse(jsonData);
   } catch (error) {
     return defaultValue;
@@ -24,11 +25,11 @@ async function readJsonFile<T>(filePath: string, defaultValue: T): Promise<T> {
 // Helper function to write JSON file
 async function writeJsonFile(filePath: string, data: any): Promise<void> {
   const dataDir = path.dirname(filePath);
-  if (!fs.existsSync(dataDir)) {
-    await fs.promises.mkdir(dataDir, { recursive: true });
+  if (!fs.access(dataDir, fs.constants.F_OK)) {
+    await fs.mkdir(dataDir, { recursive: true });
   }
 
-  await fs.promises.writeFile(
+  await fs.writeFile(
     filePath,
     JSON.stringify(data, null, 2),
     'utf-8'
@@ -36,21 +37,32 @@ async function writeJsonFile(filePath: string, data: any): Promise<void> {
 }
 
 // Profiles operations
-export async function getProfilesData(): Promise<DataStore> {
-  return readJsonFile(PROFILES_FILE_PATH, { profiles: [], skills: [] });
+export async function getProfilesData(): Promise<{ profiles: TalentProfile[] }> {
+  try {
+    const data = await fs.readFile(PROFILES_FILE, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading profiles data:', error);
+    return { profiles: [] };
+  }
 }
 
-export async function saveProfilesData(data: DataStore): Promise<void> {
-  await writeJsonFile(PROFILES_FILE_PATH, data);
+export async function saveProfilesData(data: { profiles: TalentProfile[] }): Promise<void> {
+  try {
+    await fs.writeFile(PROFILES_FILE, JSON.stringify(data, null, 2));
+  } catch (error) {
+    console.error('Error saving profiles data:', error);
+    throw error;
+  }
 }
 
 // Skills operations
 export async function getSkillsData(): Promise<DataStore> {
-  return readJsonFile(SKILLS_FILE_PATH, { profiles: [], skills: [] });
+  return readJsonFile(SKILLS_FILE, { profiles: [], skills: [] });
 }
 
 export async function saveSkillsData(data: DataStore): Promise<void> {
-  await writeJsonFile(SKILLS_FILE_PATH, data);
+  await writeJsonFile(SKILLS_FILE, data);
 }
 
 // Search operations

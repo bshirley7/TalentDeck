@@ -69,7 +69,6 @@ export default function ManageSkillsPage() {
           body: JSON.stringify({
             name: skillName,
             category: data.category,
-            proficiency: 'Intermediate', // Default proficiency
           }),
         }).then(res => {
           if (!res.ok) throw new Error(`Failed to add skill: ${skillName}`);

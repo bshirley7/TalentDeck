@@ -32,6 +32,9 @@ export function ProfileCreationForm() {
       name: '',
       title: '',
       department: '',
+      hourlyRate: undefined,
+      dayRate: undefined,
+      yearlySalary: undefined,
       contact: {
         email: '',
         phone: '',
@@ -64,6 +67,27 @@ export function ProfileCreationForm() {
     try {
       setIsLoading(true);
       setError(null);
+
+      // Handle image upload if present
+      if (data.image?.file) {
+        const formData = new FormData();
+        formData.append('image', data.image.file);
+        
+        // Upload image first
+        const imageResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!imageResponse.ok) {
+          throw new Error('Failed to upload image');
+        }
+
+        const { imageUrl } = await imageResponse.json();
+        data.image = { preview: imageUrl };
+      }
+
+      // Create profile with image URL
       await addProfile(data);
       router.push('/profiles');
     } catch (error) {

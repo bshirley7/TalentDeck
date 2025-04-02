@@ -11,23 +11,14 @@ export interface SocialProfile {
   vimeo?: string;
   behance?: string;
   dribbble?: string;
+  github?: string;
 }
 
 export interface ContactInfo {
   email: string;
   phone: string;
   website?: string;
-  linkedin?: string;
-  github?: string;
-  twitter?: string;
-  facebook?: string;
-  instagram?: string;
-  tiktok?: string;
-  bluesky?: string;
-  youtube?: string;
-  vimeo?: string;
-  behance?: string;
-  dribbble?: string;
+  social?: SocialProfile;
 }
 
 export interface Skill {
@@ -40,13 +31,42 @@ export interface ProfileSkill extends Skill {
   proficiency: ProficiencyLevel;
 }
 
-export interface Availability {
-  status: 'Available' | 'Busy' | 'Away';
-  availableFrom?: string;
+export interface ProjectCommitment {
+  projectId: string;
+  projectName: string;
+  role: string;
+  startDate: string;
+  endDate: string;
+  commitmentPercentage: number;
   notes?: string;
+}
+
+export interface SeasonalAvailability {
+  startDate: string;
+  endDate: string;
+  status: 'Available' | 'Limited' | 'Unavailable';
+  notes?: string;
+}
+
+export interface Capacity {
+  weeklyHours: number;
+  maxConcurrentProjects: number;
+  preferredProjectDuration: {
+    min: number;
+    max: number;
+  };
+}
+
+export interface Availability {
+  status: 'Available' | 'On Project' | 'On Leave' | 'Limited' | 'Unavailable';
+  availableFrom?: string;
   nextAvailable?: string;
   preferredHours?: string;
   timezone?: string;
+  bookingLeadTime?: number;
+  currentCommitments?: ProjectCommitment[];
+  seasonalAvailability?: SeasonalAvailability[];
+  capacity?: Capacity;
 }
 
 export interface TalentProfile {
@@ -56,6 +76,17 @@ export interface TalentProfile {
   title: string;
   image?: string;
   hourlyRate: number;
+  dayRate: number;
+  yearlySalary: number;
+  projectRates?: {
+    weekly: number;
+    monthly: number;
+    quarterly: number;
+    yearly: number;
+    minimumDuration: number; // in days
+    maximumDuration: number; // in days
+    discountPercentage?: number; // for longer projects
+  };
   contact: ContactInfo;
   skills: ProfileSkill[];
   availability: Availability;
@@ -66,12 +97,13 @@ export interface TalentProfile {
     institution: string;
     degree: string;
     field: string;
-    year: number;
+    startDate: string;
+    endDate: string;
   }>;
   certifications?: Array<{
     name: string;
     issuer: string;
-    year: number;
+    date: string;
     expiryDate?: string;
   }>;
 }

@@ -7,7 +7,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Spectrum - Internal Talent Resource Tool',
+  title: 'Scope - Internal Talent Resource Tool',
   description: 'Manage and discover internal talent resources.',
 };
 

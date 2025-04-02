@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Search } from 'lucide-react';
 
 export function Header() {
   const [isSkillsOpen, setIsSkillsOpen] = useState(false);
@@ -10,9 +11,10 @@ export function Header() {
     <header className="bg-white shadow">
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
+            <Search className="h-6 w-6 text-indigo-600" />
             <Link href="/" className="text-2xl font-bold text-indigo-600">
-              Spectrum
+              Scope
             </Link>
           </div>
           <nav className="flex space-x-4">

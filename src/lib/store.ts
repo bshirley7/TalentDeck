@@ -114,7 +114,7 @@ export class DataStore {
 
   public async getProfile(id: string): Promise<TalentProfile | undefined> {
     if (!this.initialized) await this.initialize();
-    return this.profiles.find(p => p.id === id);
+    return this.profiles.find(p => String(p.id) === String(id));
   }
 
   public async addProfile(profile: Omit<TalentProfile, 'id'>): Promise<TalentProfile> {

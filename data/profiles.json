@@ -5,491 +5,783 @@
       "name": "Sarah Chen",
       "title": "Senior Full-Stack Developer",
       "department": "Engineering",
-      "hourlyRate": 150,
       "image": "/images/profiles/sarah-chen.jpg",
-      "bio": "Experienced full-stack developer with expertise in modern web technologies and cloud architecture.",
-      "location": "San Francisco, CA",
-      "yearsOfExperience": 8,
+      "bio": "Senior Full-Stack Developer with 8+ years of experience building scalable web applications. Specialized in React, Node.js, and cloud architecture. Led multiple successful projects from conception to deployment, focusing on performance optimization and maintainable code.",
+      "hourlyRate": 150,
+      "dayRate": 1200,
+      "yearlySalary": 312000,
+      "contact": {
+        "email": "sarah.chen@company.com",
+        "phone": "(555) 123-4567",
+        "website": "https://sarahchen.dev",
+        "social": {
+          "linkedin": "linkedin.com/in/sarahchen",
+          "github": "github.com/sarahchen"
+        }
+      },
+      "skills": [
+        {
+          "name": "JavaScript",
+          "proficiency": "Expert",
+          "category": "Software Development",
+          "id": "s11"
+        },
+        {
+          "name": "React",
+          "proficiency": "Expert",
+          "category": "Software Development",
+          "id": "s12"
+        },
+        {
+          "name": "Node.js",
+          "proficiency": "Expert",
+          "category": "Software Development",
+          "id": "s13"
+        },
+        {
+          "name": "TypeScript",
+          "proficiency": "Advanced",
+          "category": "Software Development",
+          "id": "s14"
+        },
+        {
+          "name": "AWS",
+          "proficiency": "Advanced",
+          "category": "Software Development",
+          "id": "s15"
+        },
+        {
+          "name": "Microservices",
+          "proficiency": "Advanced",
+          "category": "Software Development",
+          "id": "s16"
+        },
+        {
+          "name": "CI/CD",
+          "proficiency": "Advanced",
+          "category": "Software Development",
+          "id": "s17"
+        },
+        {
+          "name": "Test Automation",
+          "proficiency": "Advanced",
+          "category": "Software Development",
+          "id": "s18"
+        }
+      ],
+      "availability": {
+        "status": "Available",
+        "availableFrom": "March 1, 2024",
+        "nextAvailable": "2024-04-01",
+        "preferredHours": "9 AM - 5 PM PST",
+        "timezone": "PST",
+        "bookingLeadTime": 14,
+        "currentCommitments": [
+          {
+            "projectId": "PROJ-001",
+            "projectName": "E-commerce Platform",
+            "role": "Lead Developer",
+            "startDate": "2024-02-01",
+            "endDate": "2024-03-15",
+            "commitmentPercentage": 100,
+            "notes": "Full-time commitment until March 15"
+          }
+        ],
+        "seasonalAvailability": [
+          {
+            "startDate": "2024-06-01",
+            "endDate": "2024-08-31",
+            "status": "Limited",
+            "notes": "Reduced availability during summer months"
+          }
+        ],
+        "capacity": {
+          "weeklyHours": 40,
+          "maxConcurrentProjects": 2,
+          "preferredProjectDuration": {
+            "min": 30,
+            "max": 90
+          }
+        }
+      },
       "education": [
         {
-          "degree": "BS in Computer Science",
           "institution": "Stanford University",
-          "year": 2015
+          "degree": "MS Computer Science",
+          "field": "Computer Science",
+          "startDate": "2020-01-01",
+          "endDate": "2022-01-01"
         }
       ],
       "certifications": [
         {
           "name": "AWS Certified Solutions Architect",
           "issuer": "Amazon Web Services",
-          "year": 2018
+          "date": "2023-01-01"
         }
-      ],
-      "contact": {
-        "email": "sarah.chen@company.com",
-        "phone": "+1 (555) 123-4567",
-        "website": "https://sarahchen.dev",
-        "linkedin": "linkedin.com/in/sarahchen",
-        "github": "github.com/sarahchen"
-      },
-      "skills": [
-        {
-          "name": "JavaScript",
-          "category": "Programming Languages",
-          "proficiency": "Expert"
-        },
-        {
-          "name": "React",
-          "category": "Frontend",
-          "proficiency": "Expert"
-        },
-        {
-          "name": "Node.js",
-          "category": "Backend",
-          "proficiency": "Expert"
-        },
-        {
-          "name": "TypeScript",
-          "category": "Programming Languages",
-          "proficiency": "Advanced"
-        },
-        {
-          "name": "AWS",
-          "category": "Cloud",
-          "proficiency": "Advanced"
-        }
-      ],
-      "availability": {
-        "status": "Available",
-        "nextAvailable": "2024-04-15",
-        "preferredHours": "Full-time",
-        "timezone": "America/Los_Angeles"
-      }
+      ]
     },
     {
       "id": "2",
       "name": "Marcus Rodriguez",
       "title": "Lead Data Scientist",
       "department": "Data Science",
-      "hourlyRate": 180,
       "image": "/images/profiles/marcus-rodriguez.jpg",
-      "bio": "Data science leader with expertise in machine learning and big data analytics.",
-      "location": "New York, NY",
-      "yearsOfExperience": 10,
-      "education": [
-        {
-          "degree": "MS in Data Science",
-          "institution": "MIT",
-          "year": 2014
-        }
-      ],
-      "certifications": [
-        {
-          "name": "Google Cloud Professional Data Engineer",
-          "issuer": "Google",
-          "year": 2019
-        }
-      ],
+      "bio": "Lead Data Scientist with expertise in machine learning and big data analytics. PhD in Machine Learning from MIT. Developed and deployed multiple ML models that improved business metrics by 30%+. Passionate about mentoring junior data scientists and promoting data-driven decision making.",
+      "hourlyRate": 180,
+      "dayRate": 1440,
+      "yearlySalary": 374400,
       "contact": {
         "email": "marcus.rodriguez@company.com",
-        "phone": "+1 (555) 234-5678",
+        "phone": "(555) 234-5678",
         "website": "https://marcusrodriguez.dev",
-        "linkedin": "linkedin.com/in/marcusrodriguez",
-        "github": "github.com/marcusrodriguez"
+        "social": {
+          "linkedin": "linkedin.com/in/marcusrodriguez",
+          "github": "github.com/marcusrodriguez"
+        }
       },
       "skills": [
         {
           "name": "Python",
-          "category": "Programming Languages",
-          "proficiency": "Expert"
+          "proficiency": "Expert",
+          "category": "Software Development",
+          "id": "s21"
         },
         {
           "name": "Machine Learning",
+          "proficiency": "Expert",
           "category": "Data Science",
-          "proficiency": "Expert"
+          "id": "s22"
         },
         {
           "name": "TensorFlow",
-          "category": "Machine Learning",
-          "proficiency": "Expert"
+          "proficiency": "Expert",
+          "category": "Data Science",
+          "id": "s23"
         },
         {
           "name": "SQL",
-          "category": "Database",
-          "proficiency": "Advanced"
+          "proficiency": "Advanced",
+          "category": "Data Science",
+          "id": "s24"
+        },
+        {
+          "name": "Data Analysis",
+          "proficiency": "Advanced",
+          "category": "Data Science",
+          "id": "s25"
+        },
+        {
+          "name": "Big Data",
+          "proficiency": "Advanced",
+          "category": "Data Science",
+          "id": "s26"
+        },
+        {
+          "name": "Data Visualization",
+          "proficiency": "Advanced",
+          "category": "Data Science",
+          "id": "s27"
+        },
+        {
+          "name": "Statistical Analysis",
+          "proficiency": "Advanced",
+          "category": "Data Science",
+          "id": "s28"
         }
       ],
       "availability": {
-        "status": "Available",
-        "nextAvailable": "2024-04-01",
-        "preferredHours": "Full-time",
-        "timezone": "America/New_York"
-      }
+        "status": "On Project",
+        "availableFrom": "April 15, 2024",
+        "nextAvailable": "2024-05-01",
+        "preferredHours": "10 AM - 6 PM EST",
+        "timezone": "EST",
+        "bookingLeadTime": 21,
+        "currentCommitments": [
+          {
+            "projectId": "PROJ-002",
+            "projectName": "ML Model Development",
+            "role": "Lead Data Scientist",
+            "startDate": "2024-01-15",
+            "endDate": "2024-04-15",
+            "commitmentPercentage": 100,
+            "notes": "Full-time commitment until April 15"
+          }
+        ],
+        "seasonalAvailability": [],
+        "capacity": {
+          "weeklyHours": 40,
+          "maxConcurrentProjects": 1,
+          "preferredProjectDuration": {
+            "min": 60,
+            "max": 180
+          }
+        }
+      },
+      "education": [
+        {
+          "institution": "MIT",
+          "degree": "PhD in Machine Learning",
+          "field": "Machine Learning",
+          "startDate": "2018-01-01",
+          "endDate": "2023-01-01"
+        }
+      ],
+      "certifications": [
+        {
+          "name": "Certified Data Scientist",
+          "issuer": "Data Science Council",
+          "date": "2023-01-01"
+        }
+      ]
     },
     {
       "id": "3",
       "name": "Emma Thompson",
       "title": "Senior UI/UX Designer",
       "department": "Design",
-      "hourlyRate": 140,
       "image": "/images/profiles/emma-thompson.jpg",
-      "bio": "Creative UI/UX designer with a passion for user-centered design and accessibility.",
-      "location": "Austin, TX",
-      "yearsOfExperience": 7,
-      "education": [
-        {
-          "degree": "BFA in Digital Media",
-          "institution": "Rhode Island School of Design",
-          "year": 2016
-        }
-      ],
-      "certifications": [
-        {
-          "name": "Certified UX Designer",
-          "issuer": "Nielsen Norman Group",
-          "year": 2018
-        }
-      ],
+      "bio": "Senior UI/UX Designer with a strong background in user-centered design. BFA from RISD with 6+ years of experience creating intuitive digital experiences. Led design system implementation across multiple products, resulting in 40% faster development cycles.",
+      "hourlyRate": 140,
+      "dayRate": 1120,
+      "yearlySalary": 291200,
       "contact": {
         "email": "emma.thompson@company.com",
-        "phone": "+1 (555) 345-6789",
+        "phone": "(555) 345-6789",
         "website": "https://emmathompson.design",
-        "linkedin": "linkedin.com/in/emmathompson",
-        "dribbble": "dribbble.com/emmathompson"
+        "social": {
+          "linkedin": "linkedin.com/in/emmathompson",
+          "dribbble": "dribbble.com/emmathompson"
+        }
       },
       "skills": [
         {
           "name": "UI Design",
+          "proficiency": "Expert",
           "category": "Design",
-          "proficiency": "Expert"
+          "id": "s31"
         },
         {
           "name": "UX Design",
+          "proficiency": "Expert",
           "category": "Design",
-          "proficiency": "Expert"
+          "id": "s32"
         },
         {
           "name": "Figma",
-          "category": "Design Tools",
-          "proficiency": "Expert"
+          "proficiency": "Expert",
+          "category": "Design",
+          "id": "s33"
         },
         {
           "name": "Prototyping",
+          "proficiency": "Advanced",
           "category": "Design",
-          "proficiency": "Advanced"
+          "id": "s34"
+        },
+        {
+          "name": "User Research",
+          "proficiency": "Advanced",
+          "category": "Design",
+          "id": "s35"
+        },
+        {
+          "name": "Design Systems",
+          "proficiency": "Advanced",
+          "category": "Design",
+          "id": "s36"
+        },
+        {
+          "name": "Information Architecture",
+          "proficiency": "Advanced",
+          "category": "Design",
+          "id": "s37"
+        },
+        {
+          "name": "Visual Design",
+          "proficiency": "Advanced",
+          "category": "Design",
+          "id": "s38"
         }
       ],
       "availability": {
         "status": "Available",
-        "nextAvailable": "2024-04-10",
-        "preferredHours": "Full-time",
-        "timezone": "America/Chicago"
-      }
-    },
-    {
-      "id": "4",
-      "name": "David Kim",
-      "title": "Product Designer",
-      "department": "Design",
-      "hourlyRate": 130,
-      "image": "/images/profiles/david-kim.jpg",
-      "bio": "Product designer focused on creating intuitive and beautiful user experiences.",
-      "location": "Seattle, WA",
-      "yearsOfExperience": 5,
+        "availableFrom": "March 15, 2024"
+      },
       "education": [
         {
-          "degree": "BA in Interaction Design",
-          "institution": "Carnegie Mellon University",
-          "year": 2018
+          "institution": "Rhode Island School of Design",
+          "degree": "BFA in Design",
+          "field": "Design",
+          "startDate": "2016-01-01",
+          "endDate": "2020-01-01"
         }
       ],
       "certifications": [
         {
           "name": "Google UX Design Certificate",
           "issuer": "Google",
-          "year": 2020
+          "date": "2023-01-01"
         }
-      ],
+      ]
+    },
+    {
+      "id": "4",
+      "name": "David Kim",
+      "title": "Product Designer",
+      "department": "Design",
+      "image": "/images/profiles/david-kim.jpg",
+      "bio": "Product Designer specializing in interaction design and user experience. MFA from Parsons School of Design. Created award-winning designs for mobile and web applications, focusing on accessibility and inclusive design principles.",
+      "hourlyRate": 130,
+      "dayRate": 1040,
+      "yearlySalary": 270400,
       "contact": {
         "email": "david.kim@company.com",
-        "phone": "+1 (555) 456-7890",
+        "phone": "(555) 456-7890",
         "website": "https://davidkim.design",
-        "linkedin": "linkedin.com/in/davidkim",
-        "behance": "behance.net/davidkim"
+        "social": {
+          "linkedin": "linkedin.com/in/davidkim",
+          "behance": "behance.net/davidkim"
+        }
       },
       "skills": [
         {
           "name": "Product Design",
+          "proficiency": "Expert",
           "category": "Design",
-          "proficiency": "Advanced"
+          "id": "s41"
         },
         {
-          "name": "User Research",
-          "category": "UX",
-          "proficiency": "Advanced"
-        },
-        {
-          "name": "Sketch",
-          "category": "Design Tools",
-          "proficiency": "Advanced"
+          "name": "Interaction Design",
+          "proficiency": "Expert",
+          "category": "Design",
+          "id": "s42"
         },
         {
           "name": "Adobe XD",
-          "category": "Design Tools",
-          "proficiency": "Advanced"
+          "proficiency": "Expert",
+          "category": "Design",
+          "id": "s43"
+        },
+        {
+          "name": "Sketch",
+          "proficiency": "Advanced",
+          "category": "Design",
+          "id": "s44"
+        },
+        {
+          "name": "Motion Graphics",
+          "proficiency": "Advanced",
+          "category": "Design",
+          "id": "s45"
+        },
+        {
+          "name": "Brand Identity Design",
+          "proficiency": "Advanced",
+          "category": "Design",
+          "id": "s46"
+        },
+        {
+          "name": "Design Systems",
+          "proficiency": "Advanced",
+          "category": "Design",
+          "id": "s47"
+        },
+        {
+          "name": "User Testing",
+          "proficiency": "Advanced",
+          "category": "Design",
+          "id": "s48"
         }
       ],
       "availability": {
         "status": "Available",
-        "nextAvailable": "2024-04-05",
-        "preferredHours": "Full-time",
-        "timezone": "America/Los_Angeles"
-      }
+        "availableFrom": "April 1, 2024"
+      },
+      "education": [
+        {
+          "institution": "Parsons School of Design",
+          "degree": "MFA in Design",
+          "field": "Design",
+          "startDate": "2018-01-01",
+          "endDate": "2020-01-01"
+        }
+      ],
+      "certifications": [
+        {
+          "name": "Adobe Certified Expert",
+          "issuer": "Adobe",
+          "date": "2023-01-01"
+        }
+      ]
     },
     {
       "id": "5",
       "name": "Alexandra Martinez",
       "title": "Senior Project Manager",
       "department": "Project Management",
-      "hourlyRate": 160,
       "image": "/images/profiles/alexandra-martinez.jpg",
-      "bio": "Experienced project manager with expertise in agile methodologies and team leadership.",
-      "location": "Chicago, IL",
-      "yearsOfExperience": 9,
+      "bio": "Senior Project Manager with 10+ years of experience leading complex technical projects. MBA from Harvard Business School. Certified PMP and ScrumMaster. Successfully delivered 20+ projects on time and within budget, with a focus on stakeholder satisfaction and team development.",
+      "hourlyRate": 160,
+      "dayRate": 1280,
+      "yearlySalary": 332800,
+      "contact": {
+        "email": "alexandra.martinez@company.com",
+        "phone": "(555) 567-8901",
+        "website": "https://alexandramartinez.com",
+        "social": {
+          "linkedin": "linkedin.com/in/alexandramartinez"
+        }
+      },
+      "skills": [
+        {
+          "name": "Project Management",
+          "proficiency": "Expert",
+          "category": "Project Management",
+          "id": "s51"
+        },
+        {
+          "name": "Agile Methodology",
+          "proficiency": "Expert",
+          "category": "Project Management",
+          "id": "s52"
+        },
+        {
+          "name": "Scrum",
+          "proficiency": "Expert",
+          "category": "Project Management",
+          "id": "s53"
+        },
+        {
+          "name": "Risk Management",
+          "proficiency": "Advanced",
+          "category": "Project Management",
+          "id": "s54"
+        },
+        {
+          "name": "Resource Allocation",
+          "proficiency": "Advanced",
+          "category": "Project Management",
+          "id": "s55"
+        },
+        {
+          "name": "Stakeholder Management",
+          "proficiency": "Advanced",
+          "category": "Project Management",
+          "id": "s56"
+        },
+        {
+          "name": "Budget Management",
+          "proficiency": "Advanced",
+          "category": "Project Management",
+          "id": "s57"
+        },
+        {
+          "name": "JIRA",
+          "proficiency": "Advanced",
+          "category": "Project Management",
+          "id": "s58"
+        }
+      ],
+      "availability": {
+        "status": "Available",
+        "availableFrom": "March 20, 2024"
+      },
       "education": [
         {
+          "institution": "Harvard Business School",
           "degree": "MBA",
-          "institution": "University of Chicago",
-          "year": 2015
+          "field": "Business Administration",
+          "startDate": "2018-01-01",
+          "endDate": "2020-01-01"
         }
       ],
       "certifications": [
         {
           "name": "PMP",
           "issuer": "Project Management Institute",
-          "year": 2017
+          "date": "2023-01-01"
         },
         {
-          "name": "Certified Scrum Master",
+          "name": "Certified ScrumMaster (CSM)",
           "issuer": "Scrum Alliance",
-          "year": 2018
+          "date": "2023-01-01"
         }
-      ],
-      "contact": {
-        "email": "alexandra.martinez@company.com",
-        "phone": "+1 (555) 567-8901",
-        "website": "https://alexandramartinez.com",
-        "linkedin": "linkedin.com/in/alexandramartinez"
-      },
-      "skills": [
-        {
-          "name": "Project Management",
-          "category": "Management",
-          "proficiency": "Expert"
-        },
-        {
-          "name": "Agile",
-          "category": "Methodology",
-          "proficiency": "Expert"
-        },
-        {
-          "name": "Risk Management",
-          "category": "Management",
-          "proficiency": "Advanced"
-        },
-        {
-          "name": "Team Leadership",
-          "category": "Leadership",
-          "proficiency": "Advanced"
-        }
-      ],
-      "availability": {
-        "status": "Available",
-        "nextAvailable": "2024-04-20",
-        "preferredHours": "Full-time",
-        "timezone": "America/Chicago"
-      }
+      ]
     },
     {
       "id": "6",
       "name": "James Wilson",
       "title": "Business Strategy Manager",
       "department": "Business",
-      "hourlyRate": 170,
       "image": "/images/profiles/james-wilson.jpg",
-      "bio": "Strategic business leader with expertise in market analysis and growth strategies.",
-      "location": "Boston, MA",
-      "yearsOfExperience": 12,
-      "education": [
-        {
-          "degree": "MBA",
-          "institution": "Harvard Business School",
-          "year": 2012
-        }
-      ],
-      "certifications": [
-        {
-          "name": "Six Sigma Black Belt",
-          "issuer": "ASQ",
-          "year": 2015
-        }
-      ],
+      "bio": "Business Strategy Manager with expertise in market analysis and strategic planning. MBA from Wharton School. Chartered Financial Analyst (CFA) with 8+ years of experience in business development and market research. Led multiple successful market expansion initiatives.",
+      "hourlyRate": 170,
+      "dayRate": 1360,
+      "yearlySalary": 353600,
       "contact": {
         "email": "james.wilson@company.com",
-        "phone": "+1 (555) 678-9012",
+        "phone": "(555) 678-9012",
         "website": "https://jameswilson.biz",
-        "linkedin": "linkedin.com/in/jameswilson"
+        "social": {
+          "linkedin": "linkedin.com/in/jameswilson"
+        }
       },
       "skills": [
         {
           "name": "Business Strategy",
-          "category": "Business",
-          "proficiency": "Expert"
+          "proficiency": "Expert",
+          "category": "Business & Finance",
+          "id": "s61"
         },
         {
-          "name": "Market Analysis",
-          "category": "Business",
-          "proficiency": "Expert"
+          "name": "Financial Analysis",
+          "proficiency": "Expert",
+          "category": "Business & Finance",
+          "id": "s62"
         },
         {
-          "name": "Financial Planning",
-          "category": "Business",
-          "proficiency": "Advanced"
+          "name": "Market Research",
+          "proficiency": "Expert",
+          "category": "Business & Finance",
+          "id": "s63"
         },
         {
           "name": "Strategic Planning",
-          "category": "Business",
-          "proficiency": "Advanced"
+          "proficiency": "Advanced",
+          "category": "Business & Finance",
+          "id": "s64"
+        },
+        {
+          "name": "Business Development",
+          "proficiency": "Advanced",
+          "category": "Business & Finance",
+          "id": "s65"
+        },
+        {
+          "name": "Competitive Analysis",
+          "proficiency": "Advanced",
+          "category": "Business & Finance",
+          "id": "s66"
+        },
+        {
+          "name": "Process Improvement",
+          "proficiency": "Advanced",
+          "category": "Business & Finance",
+          "id": "s67"
+        },
+        {
+          "name": "Salesforce",
+          "proficiency": "Advanced",
+          "category": "Business & Finance",
+          "id": "s68"
         }
       ],
       "availability": {
         "status": "Available",
-        "nextAvailable": "2024-04-15",
-        "preferredHours": "Full-time",
-        "timezone": "America/New_York"
-      }
+        "availableFrom": "May 1, 2024"
+      },
+      "education": [
+        {
+          "institution": "Wharton School",
+          "degree": "MBA",
+          "field": "Business Administration",
+          "startDate": "2018-01-01",
+          "endDate": "2020-01-01"
+        }
+      ],
+      "certifications": [
+        {
+          "name": "Chartered Financial Analyst (CFA)",
+          "issuer": "CFA Institute",
+          "date": "2023-01-01"
+        }
+      ]
     },
     {
       "id": "7",
       "name": "Sophia Patel",
       "title": "Technical Product Manager",
       "department": "Product",
-      "hourlyRate": 155,
       "image": "/images/profiles/sophia-patel.jpg",
-      "bio": "Technical product manager with strong background in software development and product strategy.",
-      "location": "San Francisco, CA",
-      "yearsOfExperience": 6,
-      "education": [
-        {
-          "degree": "MS in Computer Science",
-          "institution": "UC Berkeley",
-          "year": 2017
-        }
-      ],
-      "certifications": [
-        {
-          "name": "Certified Product Manager",
-          "issuer": "Product School",
-          "year": 2019
-        }
-      ],
+      "bio": "Technical Product Manager with dual MS degrees in Computer Science and Business Administration. 6+ years of experience in product strategy and technical leadership. Successfully launched multiple products from ideation to market, with a focus on user feedback and data-driven decision making.",
+      "hourlyRate": 155,
+      "dayRate": 1240,
+      "yearlySalary": 322400,
       "contact": {
         "email": "sophia.patel@company.com",
-        "phone": "+1 (555) 789-0123",
+        "phone": "(555) 789-0123",
         "website": "https://sophiapatel.com",
-        "linkedin": "linkedin.com/in/sophiapatel"
+        "social": {
+          "linkedin": "linkedin.com/in/sophiapatel"
+        }
       },
       "skills": [
         {
-          "name": "Product Strategy",
-          "category": "Product",
-          "proficiency": "Expert"
+          "name": "Product Management",
+          "proficiency": "Expert",
+          "category": "Product Management",
+          "id": "s71"
         },
         {
-          "name": "Technical Writing",
-          "category": "Communication",
-          "proficiency": "Advanced"
+          "name": "Technical Leadership",
+          "proficiency": "Expert",
+          "category": "Leadership",
+          "id": "s72"
         },
         {
-          "name": "Agile",
-          "category": "Methodology",
-          "proficiency": "Advanced"
+          "name": "Agile Development",
+          "proficiency": "Expert",
+          "category": "Project Management",
+          "id": "s73"
         },
         {
-          "name": "User Stories",
-          "category": "Product",
-          "proficiency": "Advanced"
+          "name": "User Story Writing",
+          "proficiency": "Advanced",
+          "category": "Product Management",
+          "id": "s74"
+        },
+        {
+          "name": "Product Roadmapping",
+          "proficiency": "Advanced",
+          "category": "Product Management",
+          "id": "s75"
+        },
+        {
+          "name": "Data Analysis",
+          "proficiency": "Advanced",
+          "category": "Data Science",
+          "id": "s76"
+        },
+        {
+          "name": "Stakeholder Management",
+          "proficiency": "Advanced",
+          "category": "Project Management",
+          "id": "s77"
+        },
+        {
+          "name": "A/B Testing",
+          "proficiency": "Advanced",
+          "category": "Product Management",
+          "id": "s78"
         }
       ],
       "availability": {
         "status": "Available",
-        "nextAvailable": "2024-04-10",
-        "preferredHours": "Full-time",
-        "timezone": "America/Los_Angeles"
-      }
+        "availableFrom": "April 10, 2024"
+      },
+      "education": [
+        {
+          "institution": "University",
+          "degree": "MS Computer Science",
+          "field": "Computer Science",
+          "startDate": "2016-01-01",
+          "endDate": "2018-01-01"
+        },
+        {
+          "institution": "University",
+          "degree": "MS Business Administration",
+          "field": "Business Administration",
+          "startDate": "2018-01-01",
+          "endDate": "2020-01-01"
+        }
+      ],
+      "certifications": [
+        {
+          "name": "Certified Scrum Product Owner (CSPO)",
+          "issuer": "Scrum Alliance",
+          "date": "2023-01-01"
+        }
+      ]
     },
     {
       "id": "8",
       "name": "Michael Chang",
       "title": "Solutions Architect",
       "department": "Engineering",
-      "hourlyRate": 175,
       "image": "/images/profiles/michael-chang.jpg",
-      "bio": "Solutions architect with expertise in cloud architecture and system design.",
-      "location": "Seattle, WA",
-      "yearsOfExperience": 11,
-      "education": [
-        {
-          "degree": "MS in Software Engineering",
-          "institution": "University of Washington",
-          "year": 2013
-        }
-      ],
-      "certifications": [
-        {
-          "name": "AWS Solutions Architect Professional",
-          "issuer": "Amazon Web Services",
-          "year": 2019
-        },
-        {
-          "name": "Azure Solutions Architect Expert",
-          "issuer": "Microsoft",
-          "year": 2020
-        }
-      ],
+      "bio": "Solutions Architect with expertise in cloud architecture and system design. MS in Computer Science from Georgia Tech. AWS Certified Solutions Architect Professional with 8+ years of experience designing scalable infrastructure. Led multiple successful cloud migration projects.",
+      "hourlyRate": 175,
+      "dayRate": 1400,
+      "yearlySalary": 364000,
       "contact": {
         "email": "michael.chang@company.com",
-        "phone": "+1 (555) 890-1234",
+        "phone": "(555) 890-1234",
         "website": "https://michaelchang.dev",
-        "linkedin": "linkedin.com/in/michaelchang"
+        "social": {
+          "linkedin": "linkedin.com/in/michaelchang"
+        }
       },
       "skills": [
         {
-          "name": "System Architecture",
-          "category": "Architecture",
-          "proficiency": "Expert"
+          "name": "Cloud Architecture",
+          "proficiency": "Expert",
+          "category": "Software Development",
+          "id": "s81"
         },
         {
-          "name": "Cloud Architecture",
-          "category": "Cloud",
-          "proficiency": "Expert"
+          "name": "System Design",
+          "proficiency": "Expert",
+          "category": "Software Development",
+          "id": "s82"
         },
         {
           "name": "AWS",
-          "category": "Cloud",
-          "proficiency": "Expert"
+          "proficiency": "Expert",
+          "category": "Software Development",
+          "id": "s83"
         },
         {
-          "name": "Azure",
-          "category": "Cloud",
-          "proficiency": "Advanced"
+          "name": "Kubernetes",
+          "proficiency": "Advanced",
+          "category": "Software Development",
+          "id": "s84"
+        },
+        {
+          "name": "Microservices",
+          "proficiency": "Advanced",
+          "category": "Software Development",
+          "id": "s85"
+        },
+        {
+          "name": "DevOps",
+          "proficiency": "Advanced",
+          "category": "Software Development",
+          "id": "s86"
+        },
+        {
+          "name": "Infrastructure as Code",
+          "proficiency": "Advanced",
+          "category": "Software Development",
+          "id": "s87"
+        },
+        {
+          "name": "Technical Leadership",
+          "proficiency": "Advanced",
+          "category": "Leadership",
+          "id": "s88"
         }
       ],
       "availability": {
         "status": "Available",
-        "nextAvailable": "2024-04-01",
-        "preferredHours": "Full-time",
-        "timezone": "America/Los_Angeles"
-      }
+        "availableFrom": "June 1, 2024"
+      },
+      "education": [
+        {
+          "institution": "Georgia Tech",
+          "degree": "MS Computer Science",
+          "field": "Computer Science",
+          "startDate": "2016-01-01",
+          "endDate": "2018-01-01"
+        }
+      ],
+      "certifications": [
+        {
+          "name": "AWS Certified Solutions Architect Professional",
+          "issuer": "Amazon Web Services",
+          "date": "2023-01-01"
+        }
+      ]
     }
   ]
 }

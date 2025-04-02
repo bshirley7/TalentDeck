@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Skill } from '@/types';
+import { SkillsManagementTable } from '@/components/skills/SkillsManagementTable';
+import { EditSkillForm } from '@/components/skills/EditSkillForm';
 
 const skillSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -126,9 +128,7 @@ export default function ManageSkillsPage() {
         throw new Error('Failed to delete category');
       }
 
-      // Remove category from list
       setCategories(categories.filter(c => c !== category));
-      // Remove all skills in this category
       setSkills(skills.filter(s => s.category !== category));
       setSuccess('Category deleted successfully');
       setTimeout(() => setSuccess(null), 3000);
@@ -153,6 +153,33 @@ export default function ManageSkillsPage() {
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
       setError('Failed to delete skill');
+      setTimeout(() => setError(null), 3000);
+    }
+  };
+
+  const editSkill = async (skill: Skill, data: SkillFormData) => {
+    try {
+      const response = await fetch(`/api/skills/${skill.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          category: data.category,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update skill');
+      }
+
+      const updatedSkill = await response.json();
+      setSkills(skills.map(s => s.id === skill.id ? updatedSkill : s));
+      setSuccess('Skill updated successfully');
+      setTimeout(() => setSuccess(null), 3000);
+    } catch (err) {
+      setError('Failed to update skill');
       setTimeout(() => setError(null), 3000);
     }
   };
@@ -251,12 +278,11 @@ export default function ManageSkillsPage() {
                   type="text"
                   id="name"
                   {...register('name')}
-                  placeholder="Enter skill names separated by commas"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-gray-900 placeholder-gray-500"
+                  placeholder="Enter skill names (comma-separated)"
+                  className={`mt-1 block w-full rounded-md shadow-sm sm:text-sm ${
+                    errors.name ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 />
-                <p className="mt-1 text-sm text-gray-500">
-                  Enter multiple skills separated by commas (e.g., "JavaScript, React, TypeScript")
-                </p>
                 {errors.name && (
                   <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
                 )}
@@ -269,11 +295,13 @@ export default function ManageSkillsPage() {
                 <select
                   id="category"
                   {...register('category')}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-gray-900"
+                  className={`mt-1 block w-full rounded-md shadow-sm sm:text-sm ${
+                    errors.category ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 >
-                  <option value="" className="text-gray-500">Select a category</option>
+                  <option value="">Select a category</option>
                   {categories.map((category) => (
-                    <option key={category} value={category} className="text-gray-900">
+                    <option key={category} value={category}>
                       {category}
                     </option>
                   ))}
@@ -283,42 +311,31 @@ export default function ManageSkillsPage() {
                 )}
               </div>
 
-              <button
-                type="submit"
-                className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Add Skill
-              </button>
+              <div>
+                <button
+                  type="submit"
+                  className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  Add Skill
+                </button>
+              </div>
             </form>
           </div>
         </div>
 
-        {/* Skills List */}
+        {/* Skills Table */}
         <div className="bg-white shadow sm:rounded-lg">
           <div className="px-4 py-5 sm:p-6">
             <h3 className="text-lg font-medium leading-6 text-gray-900">Current Skills</h3>
-            <div className="mt-4">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {skills.map((skill) => (
-                  <div
-                    key={skill.id}
-                    className="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm hover:border-gray-400"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-sm font-medium text-gray-900">{skill.name}</h3>
-                        <p className="mt-1 text-sm text-gray-500">{skill.category}</p>
-                      </div>
-                      <button
-                        onClick={() => deleteSkill(skill.id)}
-                        className="text-red-600 hover:text-red-900"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="mt-2 max-w-xl text-sm text-gray-500">
+              <p>Manage existing skills in the directory.</p>
+            </div>
+            <div className="mt-5">
+              <SkillsManagementTable
+                skills={skills}
+                onDelete={deleteSkill}
+                onEdit={editSkill}
+              />
             </div>
           </div>
         </div>

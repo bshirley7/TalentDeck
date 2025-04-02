@@ -1,6 +1,6 @@
-# Spectrum - Internal Talent Marketplace
+# Scope - Internal Talent Marketplace
 
-Spectrum is an internal talent marketplace designed to replace the current Airtable-based solution. It provides a comprehensive platform for discovering and connecting with internal talent across a wide range of skills and expertise.
+Scope is an internal talent marketplace designed to replace the current Airtable-based solution. It provides a comprehensive platform for discovering and connecting with internal talent across a wide range of skills and expertise.
 
 ## Features
 
@@ -22,8 +22,8 @@ Spectrum is an internal talent marketplace designed to replace the current Airta
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-org/spectrum.git
-   cd spectrum
+   git clone https://github.com/your-org/scope.git
+   cd scope
    ```
 
 2. Install dependencies:
@@ -46,7 +46,7 @@ Spectrum is an internal talent marketplace designed to replace the current Airta
 ## Project Structure
 
 ```
-spectrum/
+scope/
 ├── src/
 │   ├── app/                 # Next.js app directory
 │   │   ├── api/            # API routes

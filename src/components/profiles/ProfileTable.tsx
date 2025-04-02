@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { TalentProfile } from '@/types';
 
 interface ProfileTableProps {
@@ -20,13 +21,13 @@ export function ProfileTable({ profiles }: ProfileTableProps) {
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                   >
-                    Name
+                    Profile
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Department
+                    Domain
                   </th>
                   <th
                     scope="col"
@@ -57,8 +58,46 @@ export function ProfileTable({ profiles }: ProfileTableProps) {
               <tbody className="divide-y divide-gray-200 bg-white">
                 {profiles.map((profile) => (
                   <tr key={profile.id}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                      {profile.name}
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                      <div className="flex items-center">
+                        <div className="h-10 w-10 flex-shrink-0">
+                          {profile.image ? (
+                            <div className="relative h-10 w-10">
+                              <Image
+                                src={profile.image}
+                                alt={`${profile.name}'s profile picture`}
+                                fill
+                                className="rounded-full object-cover"
+                                sizes="40px"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = 'none';
+                                  const parent = target.parentElement;
+                                  if (parent) {
+                                    parent.classList.add('bg-gray-200');
+                                    parent.classList.add('flex');
+                                    parent.classList.add('items-center');
+                                    parent.classList.add('justify-center');
+                                    const fallback = document.createElement('span');
+                                    fallback.className = 'text-sm font-bold text-gray-500';
+                                    fallback.textContent = profile.name.split(' ').map(n => n[0]).join('');
+                                    parent.appendChild(fallback);
+                                  }
+                                }}
+                              />
+                            </div>
+                          ) : (
+                            <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                              <span className="text-sm font-bold text-gray-500">
+                                {profile.name.split(' ').map(n => n[0]).join('')}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="ml-4">
+                          <div className="font-medium text-gray-900">{profile.name}</div>
+                        </div>
+                      </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {profile.department}

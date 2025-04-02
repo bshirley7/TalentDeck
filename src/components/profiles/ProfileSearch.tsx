@@ -63,7 +63,7 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
         {/* Department Filter */}
         <div>
           <label htmlFor="department" className="block text-sm font-medium text-gray-700">
-            Department
+            Domain
           </label>
           <select
             id="department"
@@ -71,7 +71,7 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
             onChange={(e) => setDepartment(e.target.value)}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           >
-            <option value="">All Departments</option>
+            <option value="">All Domains</option>
             {departments.map((dept) => (
               <option key={dept} value={dept}>
                 {dept}
@@ -137,7 +137,7 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
           )}
           {department && (
             <span className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-              Department: {department}
+              Domain: {department}
               <button
                 onClick={() => setDepartment('')}
                 className="ml-1 text-blue-600 hover:text-blue-800"

@@ -50,7 +50,7 @@ export default function Home() {
             Everything you need to find the right talent
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Spectrum helps you discover and connect with internal talent across your organization. Find the perfect match for your projects and foster internal mobility.
+            Scope helps you discover and connect with internal talent across your organization. Find the perfect match for your projects and foster internal mobility.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">

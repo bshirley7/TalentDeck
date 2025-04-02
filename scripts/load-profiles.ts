@@ -11,6 +11,8 @@ const profiles = [
     title: "Senior Full-Stack Developer",
     department: "Engineering",
     hourlyRate: 150,
+    dayRate: 1200,
+    yearlySalary: 312000,
     contact: {
       email: "sarah.chen@company.com",
       phone: "(555) 123-4567",
@@ -56,6 +58,8 @@ const profiles = [
     title: "Lead Data Scientist",
     department: "Data Science",
     hourlyRate: 180,
+    dayRate: 1440,
+    yearlySalary: 374400,
     contact: {
       email: "marcus.rodriguez@company.com",
       phone: "(555) 234-5678",
@@ -101,6 +105,8 @@ const profiles = [
     title: "Senior UI/UX Designer",
     department: "Design",
     hourlyRate: 140,
+    dayRate: 1120,
+    yearlySalary: 291200,
     contact: {
       email: "emma.thompson@company.com",
       phone: "(555) 345-6789",
@@ -145,7 +151,9 @@ const profiles = [
     name: "David Kim",
     title: "Product Designer",
     department: "Design",
-    hourlyRate: 120,
+    hourlyRate: 130,
+    dayRate: 1040,
+    yearlySalary: 270400,
     contact: {
       email: "david.kim@company.com",
       phone: "(555) 456-7890",
@@ -191,6 +199,8 @@ const profiles = [
     title: "Senior Project Manager",
     department: "Project Management",
     hourlyRate: 160,
+    dayRate: 1280,
+    yearlySalary: 332800,
     contact: {
       email: "alexandra.martinez@company.com",
       phone: "(555) 567-8901",
@@ -240,6 +250,8 @@ const profiles = [
     title: "Business Strategy Manager",
     department: "Business",
     hourlyRate: 170,
+    dayRate: 1360,
+    yearlySalary: 353600,
     contact: {
       email: "james.wilson@company.com",
       phone: "(555) 678-9012",
@@ -283,7 +295,9 @@ const profiles = [
     name: "Sophia Patel",
     title: "Technical Product Manager",
     department: "Product",
-    hourlyRate: 145,
+    hourlyRate: 155,
+    dayRate: 1240,
+    yearlySalary: 322400,
     contact: {
       email: "sophia.patel@company.com",
       phone: "(555) 789-0123",
@@ -334,7 +348,9 @@ const profiles = [
     name: "Michael Chang",
     title: "Solutions Architect",
     department: "Engineering",
-    hourlyRate: 190,
+    hourlyRate: 175,
+    dayRate: 1400,
+    yearlySalary: 364000,
     contact: {
       email: "michael.chang@company.com",
       phone: "(555) 890-1234",
@@ -376,21 +392,25 @@ const profiles = [
   }
 ];
 
-function generateProfileId(name: string): string {
-  return 'p' + Math.random().toString(36).substr(2, 6);
+function generateProfileId(index: number): string {
+  return (index + 1).toString();
+}
+
+function generateSkillId(profileIndex: number, skillIndex: number): string {
+  return `s${profileIndex + 1}${skillIndex + 1}`;
 }
 
 function main() {
   const profilesJsonPath = path.join(process.cwd(), 'data', 'profiles.json');
 
   // Convert to TalentProfile format and add IDs
-  const talentProfiles: TalentProfile[] = profiles.map(profile => ({
-    id: generateProfileId(profile.name),
+  const talentProfiles: TalentProfile[] = profiles.map((profile, profileIndex) => ({
+    id: generateProfileId(profileIndex),
     ...profile,
-    skills: profile.skills.map(skill => ({
+    skills: profile.skills.map((skill, skillIndex) => ({
       ...skill,
       proficiency: skill.proficiency as ProficiencyLevel,
-      id: generateProfileId(skill.name)
+      id: generateSkillId(profileIndex, skillIndex)
     })),
     availability: {
       ...profile.availability,

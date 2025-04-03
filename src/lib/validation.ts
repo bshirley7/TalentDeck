@@ -26,6 +26,7 @@ export const skillSchema = z.object({
   id: z.string().optional(),
   name: z.string().min(1),
   category: z.string().min(1),
+  proficiency: z.enum(['Beginner', 'Intermediate', 'Advanced', 'Expert']).default('Intermediate'),
 });
 
 export const projectCommitmentSchema = z.object({
@@ -93,10 +94,19 @@ export const talentProfileFormSchema = z.object({
     email: z.string().email('Invalid email address'),
     phone: z.string().min(10, 'Phone number must be at least 10 digits'),
     website: z.string().url('Invalid URL').optional(),
-    social: socialProfileSchema,
+    social: z.object({
+      linkedin: z.string().url('Invalid LinkedIn URL').optional(),
+      github: z.string().url('Invalid GitHub URL').optional(),
+      dribbble: z.string().url('Invalid Dribbble URL').optional(),
+    }).default({}),
   }),
   skills: z.array(skillSchema),
-  availability: availabilitySchema,
+  availability: z.object({
+    status: z.enum(['Available', 'On Project', 'On Leave', 'Limited', 'Unavailable']),
+    nextAvailable: z.string().optional(),
+    preferredHours: z.string().optional(),
+    timezone: z.string().optional(),
+  }),
   education: z.array(z.object({
     institution: z.string(),
     degree: z.string(),

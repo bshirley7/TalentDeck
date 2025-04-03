@@ -1,7 +1,8 @@
 'use server';
 
-import { store } from './store';
+import { store } from './server/store';
 import { TalentProfile, Skill } from '@/types';
+import { saveProfilesData } from './server/data';
 
 // Profile actions
 export async function getAllProfiles() {
@@ -19,9 +20,31 @@ export async function addProfile(profile: Omit<TalentProfile, 'id'>) {
   return dataStore.addProfile(profile);
 }
 
-export async function updateProfile(id: string, profile: Partial<TalentProfile>) {
-  const dataStore = await store;
-  return dataStore.updateProfile(id, profile);
+export async function updateProfile(id: string, data: Partial<TalentProfile>) {
+  'use server';
+  
+  try {
+    const profiles = await getAllProfiles();
+    const profileIndex = profiles.findIndex((p: TalentProfile) => p.id === id);
+
+    if (profileIndex === -1) {
+      throw new Error('Profile not found');
+    }
+
+    // Update the profile with the new data
+    const updatedProfile = {
+      ...profiles[profileIndex],
+      ...data,
+    };
+
+    // Save the updated profiles
+    await saveProfilesData({ profiles: [...profiles.slice(0, profileIndex), updatedProfile, ...profiles.slice(profileIndex + 1)] });
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    throw error;
+  }
 }
 
 export async function deleteProfile(id: string) {

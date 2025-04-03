@@ -27,7 +27,11 @@ import {
   Calendar,
   Clock,
   Building2,
-  Briefcase
+  Briefcase,
+  MessageSquare,
+  Download,
+  Share2,
+  MapPin
 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
@@ -38,8 +42,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { Separator } from '@/components/ui/separator';
 
-export default function ProfileDetailPage() {
-  const params = useParams();
+export default function ProfileDetailPage({ params }: { params: { id: string } }) {
   const [profile, setProfile] = useState<TalentProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -88,340 +91,156 @@ export default function ProfileDetailPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
+    <div className="container mx-auto px-4 py-8 print:px-0 print:py-0">
+      <div className="mb-8 print:hidden">
         <Link
           href="/profiles"
           className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
         >
-          <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
+          <ChevronLeft className="mr-2 h-4 w-4" />
           Back to Profiles
         </Link>
       </div>
 
-      {/* Profile Content with Value-Based Hierarchy */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid gap-8 md:grid-cols-2">
+        {/* Left Column - Profile Header, Skills, and Education */}
         <div className="space-y-6">
-          {/* Profile Header */}
-          <Card className="mb-8">
-            <div className="p-6">
-              <div className="flex items-start space-x-6">
-                <div className="flex-shrink-0">
-                  <HoverCard>
-                    <HoverCardTrigger asChild>
-                      <Avatar className="h-32 w-32">
-                        <AvatarImage
-                          src={profile.image?.startsWith('/') ? profile.image : `/images/profiles/${profile.name.toLowerCase().replace(/\s+/g, '-')}.jpg`}
-                          alt={`${profile.name}'s profile picture`}
-                        />
-                        <AvatarFallback className="text-4xl">
-                          {profile.name.split(' ').map(n => n[0]).join('')}
-                        </AvatarFallback>
-                      </Avatar>
-                    </HoverCardTrigger>
-                    <HoverCardContent className="w-80">
-                      <div className="flex justify-between space-x-4">
-                        <Avatar>
-                          <AvatarImage
-                            src={profile.image?.startsWith('/') ? profile.image : `/images/profiles/${profile.name.toLowerCase().replace(/\s+/g, '-')}.jpg`}
-                            alt={`${profile.name}'s profile picture`}
-                          />
-                          <AvatarFallback>
-                            {profile.name.split(' ').map(n => n[0]).join('')}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="space-y-1">
-                          <h4 className="text-sm font-semibold">{profile.name}</h4>
-                          <p className="text-sm text-muted-foreground">{profile.title}</p>
-                        </div>
+          <div className="rounded-lg border bg-card p-6 shadow-sm">
+            <div className="flex items-start gap-6">
+              <div className="relative h-24 w-24 print:h-32 print:w-32">
+                <Avatar className="h-full w-full">
+                  <AvatarImage src={profile.image} alt={profile.name} />
+                  <AvatarFallback>{profile.name[0]}</AvatarFallback>
+                </Avatar>
+              </div>
+              <div className="flex-1">
+                <div className="space-y-2">
+                  <div>
+                    <h1 className="text-2xl font-bold print:text-3xl">{profile.name}</h1>
+                    <p className="text-lg text-muted-foreground print:text-xl">{profile.title}</p>
+                    <div className="flex items-center gap-2">
+                      <Building2 className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm text-muted-foreground">{profile.department}</span>
+                    </div>
+                    {profile.contact.location && (
+                      <div className="flex items-center gap-2">
+                        <MapPin className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm text-muted-foreground">{profile.contact.location}</span>
                       </div>
-                    </HoverCardContent>
-                  </HoverCard>
-                </div>
-                
-                <div className="flex-1">
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-2">
-                      <h1 className="text-2xl font-bold text-gray-900">{profile.name}</h1>
-                      <Badge variant="secondary">{profile.department}</Badge>
-                    </div>
-                    <p className="text-lg text-gray-600">{profile.title}</p>
-                    <div className="flex items-center space-x-4 text-sm text-gray-500">
-                      <div className="flex items-center space-x-1">
-                        <Building2 className="h-4 w-4" />
-                        <span>{profile.department}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Briefcase className="h-4 w-4" />
-                        <span>{profile.yearsOfExperience} years experience</span>
-                      </div>
-                    </div>
-
-                    {/* Contact Information and Social Profiles */}
-                    <div className="flex items-center space-x-6">
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                              <Mail className="h-4 w-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{profile.contact.email}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                              <Phone className="h-4 w-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{profile.contact.phone}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                      <TooltipProvider>
-                        <div className="flex items-center space-x-2">
-                          {profile.contact.social?.linkedin && (
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                                  <Linkedin className="h-4 w-4" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>LinkedIn Profile</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          )}
-                          {profile.contact.social?.github && (
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                                  <Github className="h-4 w-4" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>GitHub Profile</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          )}
-                          {profile.contact.social?.twitter && (
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                                  <Twitter className="h-4 w-4" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Twitter Profile</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          )}
-                          {profile.contact.website && (
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                                  <Globe className="h-4 w-4" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Personal Website</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          )}
-                        </div>
-                      </TooltipProvider>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex space-x-3">
-                      <Button variant="outline" size="sm" asChild>
-                        <Link href={`/profiles/${profile.id}/edit`}>
-                          Edit Profile
-                        </Link>
-                      </Button>
-                      <Button size="sm">
-                        Contact
-                      </Button>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
-          </Card>
-
-          {/* About Section */}
-          <Card className="mb-8">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold">About</h2>
-                <Badge variant="outline">Overview</Badge>
-              </div>
-              <div className="space-y-3">
-                {profile.bio && (
-                  <div className="prose prose-sm max-w-none">
-                    <p className="text-gray-600 text-sm leading-relaxed">{profile.bio}</p>
-                  </div>
-                )}
-                <div className="flex items-center space-x-4 text-sm">
-                  {profile.location && (
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button variant="ghost" size="sm" className="h-8">
-                            <svg className="h-4 w-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            {profile.location}
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Location</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  )}
-                  {profile.yearsOfExperience && (
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button variant="ghost" size="sm" className="h-8">
-                            <svg className="h-4 w-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            {profile.yearsOfExperience} years
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Years of Experience</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  )}
+            <Separator className="my-4" />
+            {/* Contact Information */}
+            <div className="space-y-2">
+              {profile.contact.email && (
+                <div className="flex items-center gap-2">
+                  <Mail className="h-4 w-4 text-muted-foreground" />
+                  <a href={`mailto:${profile.contact.email}`} className="text-sm hover:underline">
+                    {profile.contact.email}
+                  </a>
                 </div>
-              </div>
+              )}
+              {profile.contact.phone && (
+                <div className="flex items-center gap-2">
+                  <Phone className="h-4 w-4 text-muted-foreground" />
+                  <a href={`tel:${profile.contact.phone}`} className="text-sm hover:underline">
+                    {profile.contact.phone}
+                  </a>
+                </div>
+              )}
+              {profile.contact.website && (
+                <div className="flex items-center gap-2">
+                  <Globe className="h-4 w-4 text-muted-foreground" />
+                  <a href={profile.contact.website} className="text-sm hover:underline" target="_blank" rel="noopener noreferrer">
+                    {profile.contact.website}
+                  </a>
+                </div>
+              )}
             </div>
-          </Card>
+            {/* Social Links */}
+            <div className="space-y-2 mt-4">
+              {profile.contact.social?.linkedin && (
+                <div className="flex items-center gap-2">
+                  <Linkedin className="h-4 w-4 text-muted-foreground" />
+                  <a href={`https://${profile.contact.social.linkedin}`} className="text-sm hover:underline" target="_blank" rel="noopener noreferrer">
+                    {profile.contact.social.linkedin}
+                  </a>
+                </div>
+              )}
+              {profile.contact.social?.github && (
+                <div className="flex items-center gap-2">
+                  <Github className="h-4 w-4 text-muted-foreground" />
+                  <a href={`https://${profile.contact.social.github}`} className="text-sm hover:underline" target="_blank" rel="noopener noreferrer">
+                    {profile.contact.social.github}
+                  </a>
+                </div>
+              )}
+              {profile.contact.social?.dribbble && (
+                <div className="flex items-center gap-2">
+                  <Dribbble className="h-4 w-4 text-muted-foreground" />
+                  <a href={`https://${profile.contact.social.dribbble}`} className="text-sm hover:underline" target="_blank" rel="noopener noreferrer">
+                    {profile.contact.social.dribbble}
+                  </a>
+                </div>
+              )}
+            </div>
+            <Separator className="my-6" />
+            {/* About Section */}
+            <div>
+              <p className="text-sm text-muted-foreground">{profile.bio}</p>
+            </div>
+            <Separator className="my-6" />
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-2">
+              <Button variant="default" className="bg-indigo-600 hover:bg-indigo-700">
+                <MessageSquare className="mr-2 h-4 w-4" />
+                Contact
+              </Button>
+              <Button variant="outline">
+                <Download className="mr-2 h-4 w-4" />
+                Download CV
+              </Button>
+              <Button variant="outline">
+                <Share2 className="mr-2 h-4 w-4" />
+                Share
+              </Button>
+              <Link href={`/profiles/${profile.id}/edit`}>
+                <Button variant="outline">
+                  Edit Profile
+                </Button>
+              </Link>
+            </div>
+          </div>
 
           <SkillsSection skills={profile.skills} />
           <EducationSection education={profile.education} certifications={profile.certifications} />
         </div>
+
+        {/* Right Column - Rate Card and Availability */}
         <div className="space-y-6">
-          {/* Rate Card */}
-          <Card className="p-4">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-900">Rate Card</h3>
-              <Badge variant="outline">USD</Badge>
-            </div>
+          <div className="rounded-lg border bg-card p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-semibold">Rate Card</h2>
             <Table>
               <TableBody>
                 <TableRow>
-                  <TableCell className="font-medium">
-                    <div className="flex items-center space-x-1">
-                      <Clock className="h-4 w-4 text-gray-400" />
-                      <span>Hourly</span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div>
-                      <span className="font-semibold">${profile.hourlyRate}</span>
-                      <p className="text-xs text-gray-500">per hour</p>
-                    </div>
-                  </TableCell>
+                  <TableCell className="font-medium">Hourly Rate</TableCell>
+                  <TableCell className="text-right">${profile.hourlyRate}/hr</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">
-                    <div className="flex items-center space-x-1">
-                      <Calendar className="h-4 w-4 text-gray-400" />
-                      <span>Day Rate</span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div>
-                      <span className="font-semibold">${profile.dayRate}</span>
-                      <p className="text-xs text-gray-500">per day</p>
-                    </div>
-                  </TableCell>
+                  <TableCell className="font-medium">Day Rate</TableCell>
+                  <TableCell className="text-right">${profile.dayRate}/day</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">
-                    <div className="flex items-center space-x-1">
-                      <Calendar className="h-4 w-4 text-gray-400" />
-                      <span>Monthly</span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div>
-                      <span className="font-semibold">${(profile.hourlyRate * 160).toLocaleString()}</span>
-                      <p className="text-xs text-gray-500">160 hours/month</p>
-                    </div>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">
-                    <div className="flex items-center space-x-1">
-                      <Calendar className="h-4 w-4 text-gray-400" />
-                      <span>Yearly</span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div>
-                      <span className="font-semibold">${profile.yearlySalary.toLocaleString()}</span>
-                      <p className="text-xs text-gray-500">per year</p>
-                    </div>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">
-                    <div className="flex items-center space-x-1">
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div className="flex items-center space-x-1">
-                              <Briefcase className="h-4 w-4 text-gray-400" />
-                              <span>Project Rate</span>
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent className="w-80">
-                            <div className="space-y-2">
-                              <p>Project rates are calculated based on duration and scope:</p>
-                              <ul className="text-sm space-y-1">
-                                <li>• Weekly: ${(profile.dayRate * 5).toLocaleString()}</li>
-                                <li>• Monthly: ${(profile.dayRate * 20).toLocaleString()}</li>
-                                <li>• Quarterly: ${(profile.dayRate * 60).toLocaleString()}</li>
-                                <li>• Yearly: ${profile.yearlySalary.toLocaleString()}</li>
-                              </ul>
-                              {profile.projectRates?.discountPercentage && (
-                                <p className="text-sm text-green-600">
-                                  {profile.projectRates.discountPercentage}% discount for projects longer than {profile.projectRates.minimumDuration} days
-                                </p>
-                              )}
-                            </div>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div>
-                      <span className="font-semibold">${(profile.dayRate * 5).toLocaleString()}</span>
-                      <p className="text-xs text-gray-500">per week (5 days)</p>
-                    </div>
-                  </TableCell>
+                  <TableCell className="font-medium">Yearly Salary</TableCell>
+                  <TableCell className="text-right">${profile.yearlySalary.toLocaleString()}/year</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
-            <Separator className="my-3" />
-            <div className="flex items-center justify-between text-xs text-gray-500">
-              <span>Payment Terms</span>
-              <Badge variant="secondary">Net 30</Badge>
-            </div>
-          </Card>
+          </div>
+
           <AvailabilitySection availability={profile.availability} />
         </div>
       </div>
@@ -440,8 +259,8 @@ const SkillsSection = ({ skills }: { skills: ProfileSkill[] }) => {
   }, {} as Record<string, ProfileSkill[]>);
 
   return (
-    <Card className="p-4">
-      <div className="flex items-center justify-between mb-3">
+    <Card className="p-6">
+      <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">Skills & Expertise</h2>
         <Badge variant="outline">{skills.length} Skills</Badge>
       </div>
@@ -481,8 +300,8 @@ const EducationSection = ({
   certifications?: TalentProfile['certifications'];
 }) => {
   return (
-    <Card className="p-4">
-      <div className="flex items-center justify-between mb-3">
+    <Card className="p-6">
+      <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">Education & Certifications</h2>
         <Badge variant="outline">
           {(education?.length || 0) + (certifications?.length || 0)} Items
@@ -552,8 +371,8 @@ const AvailabilitySection = ({ availability }: { availability: Availability }) =
   };
 
   return (
-    <Card className="p-4">
-      <div className="flex items-center justify-between mb-3">
+    <Card className="p-6">
+      <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">Availability</h2>
         <Badge variant="outline" className={getStatusColor(availability.status)}>
           {availability.status}

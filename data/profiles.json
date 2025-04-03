@@ -14,6 +14,7 @@
         "email": "sarah.chen@company.com",
         "phone": "(555) 123-4567",
         "website": "https://sarahchen.dev",
+        "location": "San Francisco, CA",
         "social": {
           "linkedin": "linkedin.com/in/sarahchen",
           "github": "github.com/sarahchen"
@@ -135,6 +136,7 @@
         "email": "marcus.rodriguez@company.com",
         "phone": "(555) 234-5678",
         "website": "https://marcusrodriguez.dev",
+        "location": "Boston, MA",
         "social": {
           "linkedin": "linkedin.com/in/marcusrodriguez",
           "github": "github.com/marcusrodriguez"
@@ -249,6 +251,7 @@
         "email": "emma.thompson@company.com",
         "phone": "(555) 345-6789",
         "website": "https://emmathompson.design",
+        "location": "New York, NY",
         "social": {
           "linkedin": "linkedin.com/in/emmathompson",
           "dribbble": "dribbble.com/emmathompson"
@@ -339,6 +342,7 @@
         "email": "david.kim@company.com",
         "phone": "(555) 456-7890",
         "website": "https://davidkim.design",
+        "location": "Seattle, WA",
         "social": {
           "linkedin": "linkedin.com/in/davidkim",
           "behance": "behance.net/davidkim"
@@ -429,6 +433,7 @@
         "email": "alexandra.martinez@company.com",
         "phone": "(555) 567-8901",
         "website": "https://alexandramartinez.com",
+        "location": "Chicago, IL",
         "social": {
           "linkedin": "linkedin.com/in/alexandramartinez"
         }
@@ -523,6 +528,7 @@
         "email": "james.wilson@company.com",
         "phone": "(555) 678-9012",
         "website": "https://jameswilson.biz",
+        "location": "Philadelphia, PA",
         "social": {
           "linkedin": "linkedin.com/in/jameswilson"
         }
@@ -612,6 +618,7 @@
         "email": "sophia.patel@company.com",
         "phone": "(555) 789-0123",
         "website": "https://sophiapatel.com",
+        "location": "Austin, TX",
         "social": {
           "linkedin": "linkedin.com/in/sophiapatel"
         }
@@ -708,6 +715,7 @@
         "email": "michael.chang@company.com",
         "phone": "(555) 890-1234",
         "website": "https://michaelchang.dev",
+        "location": "Atlanta, GA",
         "social": {
           "linkedin": "linkedin.com/in/michaelchang"
         }

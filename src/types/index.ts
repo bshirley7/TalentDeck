@@ -18,6 +18,7 @@ export interface ContactInfo {
   email: string;
   phone: string;
   website?: string;
+  location?: string;
   social?: SocialProfile;
 }
 
@@ -27,8 +28,11 @@ export interface Skill {
   category: string;
 }
 
-export interface ProfileSkill extends Skill {
-  proficiency: ProficiencyLevel;
+export interface ProfileSkill {
+  id: string;
+  name: string;
+  category: string;
+  proficiency: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
 }
 
 export interface ProjectCommitment {
@@ -67,6 +71,7 @@ export interface Availability {
   currentCommitments?: ProjectCommitment[];
   seasonalAvailability?: SeasonalAvailability[];
   capacity?: Capacity;
+  hours?: string;
 }
 
 export interface TalentProfile {
@@ -91,14 +96,17 @@ export interface TalentProfile {
   skills: ProfileSkill[];
   availability: Availability;
   bio?: string;
+  about?: string;
   location?: string;
   yearsOfExperience?: number;
+  tags?: string[];
   education?: Array<{
     institution: string;
     degree: string;
     field: string;
     startDate: string;
     endDate: string;
+    period?: string;
   }>;
   certifications?: Array<{
     name: string;

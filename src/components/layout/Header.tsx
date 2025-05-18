@@ -1,14 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function Header() {
   const [isSkillsOpen, setIsSkillsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsSkillsOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const isActive = (path: string) => pathname === path;
 
   return (
-    <header className="bg-white shadow">
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <header className="bg-white shadow-sm sticky top-0 z-50">
+      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8">
@@ -17,29 +34,41 @@ export function Header() {
                 <path d="M140.525 103.75L135.006 122.185L109.341 207.911C107.986 212.448 110.592 217.212 115.168 218.564L123.936 221.148C123.612 217.947 124.161 214.721 125.53 211.804L171.717 113.272C173.119 110.267 175.34 107.707 178.127 105.884L151.265 97.9689C151.017 97.896 150.768 97.8347 150.519 97.7847C146.186 96.915 141.811 99.4587 140.525 103.75Z" fill="currentColor" className="text-indigo-600"/>
               </svg>
             </div>
-            <Link href="/" className="text-2xl font-extrabold text-indigo-600">
+            <Link href="/" className="text-2xl font-extrabold text-indigo-600 hover:text-indigo-700 transition-colors">
               TalentDeck
             </Link>
           </div>
-          <nav className="flex space-x-4">
+          <nav className="flex items-center space-x-4">
             <Link
               href="/"
-              className="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                isActive('/') 
+                  ? 'text-indigo-600 bg-indigo-50' 
+                  : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+              }`}
             >
               Home
             </Link>
             <Link
               href="/profiles"
-              className="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                isActive('/profiles') 
+                  ? 'text-indigo-600 bg-indigo-50' 
+                  : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+              }`}
             >
               Profiles
             </Link>
             
             {/* Skills Dropdown */}
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsSkillsOpen(!isSkillsOpen)}
-                className="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium inline-flex items-center"
+                className={`px-3 py-2 rounded-md text-sm font-medium inline-flex items-center transition-colors ${
+                  isActive('/skills') || isActive('/skills/manage')
+                    ? 'text-indigo-600 bg-indigo-50' 
+                    : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                }`}
               >
                 <span>Skills</span>
                 <svg
@@ -60,18 +89,26 @@ export function Header() {
               </button>
               
               {isSkillsOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
                   <div className="py-1" role="menu">
                     <Link
                       href="/skills"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className={`block px-4 py-2 text-sm transition-colors ${
+                        isActive('/skills')
+                          ? 'text-indigo-600 bg-indigo-50'
+                          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                      }`}
                       onClick={() => setIsSkillsOpen(false)}
                     >
                       Browse Skills
                     </Link>
                     <Link
                       href="/skills/manage"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className={`block px-4 py-2 text-sm transition-colors ${
+                        isActive('/skills/manage')
+                          ? 'text-indigo-600 bg-indigo-50'
+                          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                      }`}
                       onClick={() => setIsSkillsOpen(false)}
                     >
                       Manage Skills
@@ -83,7 +120,11 @@ export function Header() {
 
             <Link
               href="/import"
-              className="text-gray-500 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                isActive('/import') 
+                  ? 'text-indigo-600 bg-indigo-50' 
+                  : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+              }`}
             >
               Import
             </Link>

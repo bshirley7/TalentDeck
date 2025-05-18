@@ -1,29 +1,29 @@
-# Scope - Internal Talent Marketplace
+# TalentDeck
 
-Scope is an internal talent marketplace designed to replace the current Airtable-based solution. It provides a comprehensive platform for discovering and connecting with internal talent across a wide range of skills and expertise.
+TalentDeck is an internal talent marketplace platform that helps organizations discover, manage, and connect their internal talent with projects. Built with modern web technologies, it provides a seamless experience for both talent and project managers.
 
 ## Features
 
-- **Talent Profiles**: Comprehensive profiles with detailed skill information
-- **Search & Discovery**: Advanced search with multiple filters
-- **Skills Directory**: Browse and explore available skills
-- **Data Import**: Import data from Airtable or CSV files
-- **Profile Management**: Create and edit talent profiles
-- **Availability Tracking**: Track talent availability and scheduling
+- **Talent Discovery**: Find the right people for your projects with advanced search and matching algorithms
+- **Skills Management**: Track and manage skills across your organization with a comprehensive skills directory
+- **Project Matching**: Connect talent with projects based on skills, availability, and preferences
+- **Profile Management**: Create and maintain detailed talent profiles with skills, experience, and availability information
+- **Import Tools**: Easily import data from Airtable or CSV files
+
+## Tech Stack
+
+- **Frontend**: Next.js 14, React, Tailwind CSS
+- **UI Components**: Headless UI, Heroicons
+- **Animations**: Framer Motion
+- **Styling**: Tailwind CSS
+- **Type Safety**: TypeScript
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 18.x or later
-- npm 9.x or later
-
-### Installation
-
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-org/scope.git
-   cd scope
+   git clone https://github.com/yourusername/talentdeck.git
+   cd talentdeck
    ```
 
 2. Install dependencies:
@@ -31,111 +31,50 @@ Scope is an internal talent marketplace designed to replace the current Airtable
    npm install
    ```
 
-3. Create a `.env.local` file in the root directory:
-   ```env
-   # Add any environment variables here
-   ```
-
-4. Start the development server:
+3. Run the development server:
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
 ```
-scope/
+talentdeck/
 ├── src/
-│   ├── app/                 # Next.js app directory
-│   │   ├── api/            # API routes
-│   │   ├── profiles/       # Profile pages
-│   │   ├── skills/         # Skills directory pages
-│   │   └── import/         # Import functionality
-│   ├── components/         # React components
-│   ├── lib/               # Utility functions and data handling
-│   └── types/             # TypeScript type definitions
-├── data/                  # JSON data storage
-├── public/               # Static assets
-└── tests/               # Test files
-```
-
-## Data Structure
-
-The application uses a JSON-based data structure stored in the `data` directory:
-
-```typescript
-interface TalentProfile {
-  id: string;
-  name: string;
-  department: string;
-  title: string;
-  contact: {
-    email: string;
-    phone: string;
-    website?: string;
-    social: {
-      linkedin?: string;
-      twitter?: string;
-      // ... other social profiles
-    };
-  };
-  skills: Array<{
-    id: string;
-    name: string;
-    category: string;
-    proficiency: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
-  }>;
-  availability: {
-    status: 'Available' | 'Busy' | 'Away';
-    availableFrom?: string;
-    notes?: string;
-  };
-}
+│   ├── app/              # Next.js app directory
+│   ├── components/       # React components
+│   │   ├── layout/      # Layout components (Header, Footer)
+│   │   └── ui/          # Reusable UI components
+│   ├── lib/             # Utility functions and shared logic
+│   └── types/           # TypeScript type definitions
+├── public/              # Static assets
+└── tests/              # Test files
 ```
 
 ## Development
 
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run test` - Run tests
-
-### Adding New Features
-
-1. Create new components in `src/components`
-2. Add new pages in `src/app`
-3. Add new API routes in `src/app/api`
-4. Update types in `src/types`
-5. Add tests in `tests` directory
-
-### Data Import
-
-The application supports importing data from:
-- Airtable exports (JSON)
-- CSV files
-
-See the import page for more details.
+- **Code Style**: Follows ESLint and Prettier configurations
+- **Type Safety**: Strict TypeScript configuration
+- **Component Structure**: Modular, reusable components with proper TypeScript types
+- **State Management**: React hooks and context for state management
 
 ## Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+3. Commit your changes (`git commit -m 'feat: Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- Next.js for the framework
-- Tailwind CSS for styling
-- Zod for validation
-- React Hook Form for form handling
+- Built with [Next.js](https://nextjs.org/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+- Icons from [Heroicons](https://heroicons.com/)
+- Animations powered by [Framer Motion](https://www.framer.com/motion/)

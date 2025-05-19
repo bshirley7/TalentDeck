@@ -34,7 +34,7 @@ export function Header() {
                 <path d="M140.525 103.75L135.006 122.185L109.341 207.911C107.986 212.448 110.592 217.212 115.168 218.564L123.936 221.148C123.612 217.947 124.161 214.721 125.53 211.804L171.717 113.272C173.119 110.267 175.34 107.707 178.127 105.884L151.265 97.9689C151.017 97.896 150.768 97.8347 150.519 97.7847C146.186 96.915 141.811 99.4587 140.525 103.75Z" fill="currentColor" className="text-indigo-600"/>
               </svg>
             </div>
-            <Link href="/" className="text-2xl font-extrabold text-indigo-600 hover:text-indigo-700 transition-colors">
+            <Link href="/" className="text-3xl font-black tracking-wide text-black hover:text-indigo-700 transition-colors">
               TalentDeck
             </Link>
           </div>

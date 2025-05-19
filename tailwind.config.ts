@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import animate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: ['class', 'class'],
@@ -17,6 +18,18 @@ const config: Config = {
   		}
   	},
   	extend: {
+  		fontFamily: {
+  			sans: ['var(--font-plus-jakarta)', 'system-ui', 'sans-serif'],
+  		},
+  		fontWeight: {
+  			thin: '200',
+  			light: '300',
+  			normal: '400',
+  			medium: '500',
+  			semibold: '600',
+  			bold: '700',
+  			extrabold: '800',
+  		},
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
@@ -92,7 +105,7 @@ const config: Config = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animate],
 };
 
 export default config; 

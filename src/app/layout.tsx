@@ -1,14 +1,20 @@
 import * as React from 'react';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const plusJakarta = Plus_Jakarta_Sans({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-plus-jakarta',
+  weight: ['200', '300', '400', '500', '600', '700', '800'],
+});
 
 export const metadata: Metadata = {
-  title: 'Scope - Internal Talent Resource Tool',
-  description: 'Manage and discover internal talent resources.',
+  title: 'TalentDeck - Discover Your TalentDeck',
+  description: 'Manage and discover internal talent resources all-in-one place.',
 };
 
 export default function RootLayout({
@@ -17,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={plusJakarta.variable}>
+      <body className="font-sans antialiased">
         <div className="relative flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">
@@ -26,6 +32,7 @@ export default function RootLayout({
               {children}
             </div>
           </main>
+          <Footer />
         </div>
       </body>
     </html>

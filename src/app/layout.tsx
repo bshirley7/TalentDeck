@@ -15,6 +15,22 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: 'TalentDeck - Discover Your TalentDeck',
   description: 'Manage and discover internal talent resources all-in-one place.',
+  icons: [
+    {
+      rel: 'icon',
+      url: '/favicon/favicon.svg',
+      media: '(prefers-color-scheme: light)',
+    },
+    {
+      rel: 'icon',
+      url: '/favicon/favicon-dark.svg',
+      media: '(prefers-color-scheme: dark)',
+    },
+    {
+      rel: 'apple-touch-icon',
+      url: '/favicon/favicon.svg',
+    },
+  ],
 };
 
 export default function RootLayout({

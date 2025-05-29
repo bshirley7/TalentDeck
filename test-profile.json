@@ -1,0 +1,21 @@
+{
+  "name": "Test User",
+  "title": "Test Title",
+  "department": "Test",
+  "contact": {
+    "email": "test@test.com",
+    "phone": "123-456-7890",
+    "social": {}
+  },
+  "skills": [
+    {
+      "id": "s11",
+      "name": "JavaScript",
+      "category": "Software Development",
+      "proficiency": "Expert"
+    }
+  ],
+  "availability": {
+    "status": "Available"
+  }
+} 

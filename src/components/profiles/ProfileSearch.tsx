@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { TalentProfile } from '@/types';
+import { SkillsDropdown, SelectedSkill } from '@/components/ui/test-component';
 
 interface ProfileSearchProps {
   profiles: TalentProfile[];
@@ -12,18 +13,18 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [department, setDepartment] = useState('');
   const [availability, setAvailability] = useState('');
-  const [skillFilter, setSkillFilter] = useState('');
+  const [selectedSkills, setSelectedSkills] = useState<SelectedSkill[]>([]);
 
-  // Get unique departments and skills for dropdowns
+  // Get unique departments
   const departments = Array.from(new Set(profiles.map(p => p.department)));
-  const skills = Array.from(new Set(profiles.flatMap(p => p.skills.map(s => s.name))));
   const availabilityOptions = ['Available', 'Busy', 'Away'];
 
   useEffect(() => {
     const filteredProfiles = profiles.filter(profile => {
       const matchesSearch = searchTerm === '' || 
         profile.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        profile.title.toLowerCase().includes(searchTerm.toLowerCase());
+        profile.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        profile.bio?.toLowerCase().includes(searchTerm.toLowerCase());
 
       const matchesDepartment = department === '' || 
         profile.department === department;
@@ -31,16 +32,19 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
       const matchesAvailability = availability === '' || 
         profile.availability.status === availability;
 
-      const matchesSkill = skillFilter === '' || 
-        profile.skills.some(skill => 
-          skill.name.toLowerCase().includes(skillFilter.toLowerCase())
+      // Check if profile has any of the selected skills
+      const matchesSkills = selectedSkills.length === 0 || 
+        selectedSkills.some(selectedSkill => 
+          profile.skills?.some(skill => 
+            skill.name.toLowerCase() === selectedSkill.value
+          )
         );
 
-      return matchesSearch && matchesDepartment && matchesAvailability && matchesSkill;
+      return matchesSearch && matchesDepartment && matchesAvailability && matchesSkills;
     });
 
     onSearch(filteredProfiles);
-  }, [searchTerm, department, availability, skillFilter, profiles, onSearch]);
+  }, [searchTerm, department, availability, selectedSkills, profiles, onSearch]);
 
   return (
     <div className="mb-6 space-y-4">
@@ -56,7 +60,7 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by name or title..."
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full h-10 px-3 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>
 
@@ -69,7 +73,7 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
             id="department"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full h-10 px-3 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           >
             <option value="">All Domains</option>
             {departments.map((dept) => (
@@ -89,7 +93,7 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
             id="availability"
             value={availability}
             onChange={(e) => setAvailability(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full h-10 px-3 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           >
             <option value="">All Statuses</option>
             {availabilityOptions.map((status) => (
@@ -100,36 +104,19 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
           </select>
         </div>
 
-        {/* Skills Filter */}
-        <div>
-          <label htmlFor="skills" className="block text-sm font-medium text-gray-700">
-            Skills
-          </label>
-          <select
-            id="skills"
-            value={skillFilter}
-            onChange={(e) => setSkillFilter(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          >
-            <option value="">All Skills</option>
-            {skills.map((skill) => (
-              <option key={skill} value={skill}>
-                {skill}
-              </option>
-            ))}
-          </select>
-        </div>
+                {/* Skills Filter - Dropdown */}        <div>          <label htmlFor="skills" className="block text-sm font-medium text-gray-700 mb-1">            Skills          </label>          <div style={{             border: '20px solid red',             padding: '30px',             backgroundColor: 'yellow',            margin: '20px 0'          }}>            <h1 style={{ color: 'red', fontSize: '24px', fontWeight: 'bold' }}>              🚨🚨🚨 SKILLS SECTION FOUND! 🚨🚨🚨            </h1>            <p>If you see this, the ProfileSearch component is working!</p>            <button               onClick={() => {                console.log('🔥 INLINE TEST BUTTON CLICKED!');                alert('Button works! Component is loading correctly.');              }}              style={{                 padding: '15px 30px',                 backgroundColor: 'red',                 color: 'white',                 border: 'none',                cursor: 'pointer',                fontSize: '16px'              }}            >              CLICK ME TO TEST            </button>          </div>          <SkillsDropdown value={selectedSkills} onChange={setSelectedSkills} />        </div>
       </div>
 
       {/* Active Filters */}
-      {(searchTerm || department || availability || skillFilter) && (
-        <div className="flex flex-wrap gap-2">
+      {(searchTerm || department || availability || selectedSkills.length > 0) && (
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-sm font-medium text-gray-700">Active filters:</span>
           {searchTerm && (
-            <span className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
+            <span className="inline-flex items-center rounded-full bg-gradient-primary px-2.5 py-0.5 text-xs font-medium text-blue-100">
               Search: {searchTerm}
               <button
                 onClick={() => setSearchTerm('')}
-                className="ml-1 text-blue-600 hover:text-blue-800"
+                className="ml-1 text-gradient-primary hover:text-gradient-primary-hover"
               >
                 ×
               </button>
@@ -157,17 +144,28 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
               </button>
             </span>
           )}
-          {skillFilter && (
-            <span className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-              Skill: {skillFilter}
+          {selectedSkills.map((skill) => (
+            <span key={skill.value} className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+              Skill: {skill.label}
               <button
-                onClick={() => setSkillFilter('')}
-                className="ml-1 text-blue-600 hover:text-blue-800"
+                onClick={() => setSelectedSkills(prev => prev.filter(s => s.value !== skill.value))}
+                className="ml-1 text-green-600 hover:text-green-800"
               >
                 ×
               </button>
             </span>
-          )}
+          ))}
+          <button
+            onClick={() => {
+              setSearchTerm('');
+              setDepartment('');
+              setAvailability('');
+              setSelectedSkills([]);
+            }}
+            className="ml-2 text-xs text-gray-500 hover:text-gray-700 underline"
+          >
+            Clear all
+          </button>
         </div>
       )}
     </div>

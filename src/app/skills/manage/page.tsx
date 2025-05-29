@@ -4,12 +4,11 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Skill } from '@/types';
 import { SkillsManagementTable } from '@/components/skills/SkillsManagementTable';
-import { EditSkillForm } from '@/components/skills/EditSkillForm';
+import { Skill } from '@/types';
 
 const skillSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
+  name: z.string().min(1, 'Skill name is required'),
   category: z.string().min(1, 'Category is required'),
 });
 
@@ -21,7 +20,6 @@ export default function ManageSkillsPage() {
   const [newCategory, setNewCategory] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   // Load initial data
   useEffect(() => {
@@ -39,8 +37,8 @@ export default function ManageSkillsPage() {
         const categoriesData = await categoriesResponse.json();
         setCategories(categoriesData);
       } catch (err) {
-        setError('Failed to load data');
-        setTimeout(() => setError(null), 3000);
+        console.error('Error loading data:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load data');
       }
     };
 
@@ -86,7 +84,8 @@ export default function ManageSkillsPage() {
       setSuccess(`Successfully added ${newSkills.length} skill${newSkills.length > 1 ? 's' : ''}`);
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
-      setError('Failed to add one or more skills');
+      console.error('Error adding skills:', err);
+      setError(err instanceof Error ? err.message : 'Failed to add skills');
       setTimeout(() => setError(null), 3000);
     }
   };
@@ -113,7 +112,8 @@ export default function ManageSkillsPage() {
       setSuccess('Category added successfully');
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
-      setError('Failed to add category');
+      console.error('Error adding category:', err);
+      setError(err instanceof Error ? err.message : 'Failed to add category');
       setTimeout(() => setError(null), 3000);
     }
   };
@@ -133,7 +133,8 @@ export default function ManageSkillsPage() {
       setSuccess('Category deleted successfully');
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
-      setError('Failed to delete category. Category may have associated skills.');
+      console.error('Error deleting category:', err);
+      setError(err instanceof Error ? err.message : 'Failed to delete category');
       setTimeout(() => setError(null), 3000);
     }
   };
@@ -152,7 +153,8 @@ export default function ManageSkillsPage() {
       setSuccess('Skill deleted successfully');
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
-      setError('Failed to delete skill');
+      console.error('Error deleting skill:', err);
+      setError(err instanceof Error ? err.message : 'Failed to delete skill');
       setTimeout(() => setError(null), 3000);
     }
   };
@@ -179,7 +181,8 @@ export default function ManageSkillsPage() {
       setSuccess('Skill updated successfully');
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
-      setError('Failed to update skill');
+      console.error('Error updating skill:', err);
+      setError(err instanceof Error ? err.message : 'Failed to update skill');
       setTimeout(() => setError(null), 3000);
     }
   };
@@ -235,7 +238,7 @@ export default function ManageSkillsPage() {
                 <button
                   type="button"
                   onClick={addCategory}
-                  className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="inline-flex items-center rounded-md border border-transparent bg-gradient-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gradient-primary-hover focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 whitespace-nowrap"
                 >
                   Add Category
                 </button>
@@ -314,7 +317,7 @@ export default function ManageSkillsPage() {
               <div>
                 <button
                   type="submit"
-                  className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="inline-flex items-center rounded-md border border-transparent bg-gradient-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gradient-primary-hover focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
                 >
                   Add Skill
                 </button>

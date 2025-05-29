@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getProfilesData, saveProfilesData } from '@/lib/server/data';
 import { z } from 'zod';
-import { TalentProfile } from '@/types';
+import { ProfileService } from '@/services/profiles.service';
 
 const profileSchema = z.object({
   name: z.string().min(1),
@@ -34,11 +33,16 @@ const profileSchema = z.object({
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const data = await getProfilesData();
-    const profile = data.profiles.find((p) => p.id === params.id);
+    const { id } = await params;
+    
+    // Use ProfileService instead of JSON file storage
+    const profileService = ProfileService.getInstance();
+    await profileService.initialize();
+    
+    const profile = await profileService.getProfileById(id);
 
     if (!profile) {
       return NextResponse.json(
@@ -58,29 +62,25 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
     const validatedData = profileSchema.parse(body);
 
-    const data = await getProfilesData();
-    const profileIndex = data.profiles.findIndex((p) => p.id === params.id);
+    // Use ProfileService instead of JSON file storage
+    const profileService = ProfileService.getInstance();
+    await profileService.initialize();
+    
+    const updatedProfile = await profileService.updateProfile(id, validatedData);
 
-    if (profileIndex === -1) {
+    if (!updatedProfile) {
       return NextResponse.json(
         { error: 'Profile not found' },
         { status: 404 }
       );
     }
-
-    const updatedProfile: TalentProfile = {
-      ...data.profiles[profileIndex],
-      ...validatedData,
-    };
-
-    data.profiles[profileIndex] = updatedProfile;
-    await saveProfilesData(data);
 
     return NextResponse.json(updatedProfile);
   } catch (error) {
@@ -99,21 +99,23 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const data = await getProfilesData();
-    const profileIndex = data.profiles.findIndex((p) => p.id === params.id);
+    const { id } = await params;
+    
+    // Use ProfileService instead of JSON file storage
+    const profileService = ProfileService.getInstance();
+    await profileService.initialize();
+    
+    const deleted = await profileService.deleteProfile(id);
 
-    if (profileIndex === -1) {
+    if (!deleted) {
       return NextResponse.json(
         { error: 'Profile not found' },
         { status: 404 }
       );
     }
-
-    data.profiles.splice(profileIndex, 1);
-    await saveProfilesData(data);
 
     return NextResponse.json({ message: 'Profile deleted successfully' });
   } catch (error) {

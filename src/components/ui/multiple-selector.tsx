@@ -1,20 +1,19 @@
 'use client';
 
 import { Command as CommandPrimitive, useCommandState } from 'cmdk';
-import { X } from 'lucide-react';
 import * as React from 'react';
 import { forwardRef, useEffect } from 'react';
 
 import { Badge } from '@/components/ui/badge';
-import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command';
+import { Command, CommandGroup, CommandItem, CommandInput, CommandList } from '@/components/ui/command';
 import { cn } from '@/lib/utils';
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Check, ChevronsUpDown, PlusCircle } from "lucide-react"
+} from "@/components/ui/popover";
+import { Check, ChevronsUpDown } from "lucide-react";
 
 export interface Option {
   value: string;
@@ -435,34 +434,50 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
-          <Command>
+          <Command shouldFilter={false}>
             <CommandInput
               placeholder="Search options..."
               value={inputValue}
               onValueChange={setInputValue}
               onKeyDown={handleKeyDown}
             />
-            <CommandEmpty>{emptyMessage}</CommandEmpty>
-            {Array.isArray(options) && options.length > 0 && "heading" in options[0] ? (
-              (options as GroupOption[]).map((group) => (
-                <CommandGroup key={group.heading} heading={group.heading}>
-                  {group.options.map((option) => {
+            <CommandList>
+              <CommandEmpty>
+                {emptyIndicator || "No results found."}
+              </CommandEmpty>
+              {Object.entries(selectables).map(([key, groupOptions]) => (
+                <CommandGroup key={key} heading={key || undefined}>
+                  {groupOptions.map((option) => {
                     const isSelected = selected.some(
                       (item) => item.value === option.value
                     )
+                    
+                    const handleSelectOption = () => {
+                      if (isSelected) {
+                        handleUnselect(option)
+                      } else {
+                        if (maxSelected && selected.length >= maxSelected) {
+                          onMaxSelected?.(maxSelected)
+                          return
+                        }
+                        const newOptions = [...selected, option]
+                        setSelected(newOptions)
+                        onChange?.(newOptions)
+                      }
+                      setInputValue('')
+                    }
+                    
                     return (
                       <CommandItem
                         key={option.value}
-                        onSelect={() => {
-                          if (isSelected) {
-                            handleUnselect(option)
-                          } else {
-                            if (maxSelected && selected.length >= maxSelected) {
-                              return
-                            }
-                            onChange([...selected, option])
-                          }
+                        value={option.value}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
                         }}
+                        onSelect={handleSelectOption}
+                        onClick={handleSelectOption}
+                        className="cursor-pointer"
                       >
                         <Check
                           className={cn(
@@ -475,37 +490,9 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                     )
                   })}
                 </CommandGroup>
-              ))
-            ) : (
-              (options as Option[]).map((option) => {
-                const isSelected = selected.some(
-                  (item) => item.value === option.value
-                )
-                return (
-                  <CommandItem
-                    key={option.value}
-                    onSelect={() => {
-                      if (isSelected) {
-                        handleUnselect(option)
-                      } else {
-                        if (maxSelected && selected.length >= maxSelected) {
-                          return
-                        }
-                        onChange([...selected, option])
-                      }
-                    }}
-                  >
-                    <Check
-                      className={cn(
-                        "mr-2 h-4 w-4",
-                        isSelected ? "opacity-100" : "opacity-0"
-                      )}
-                    />
-                    {option.label}
-                  </CommandItem>
-                )
-              })
-            )}
+              ))}
+              <CreatableItem />
+            </CommandList>
           </Command>
         </PopoverContent>
       </Popover>

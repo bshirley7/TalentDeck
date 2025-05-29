@@ -2,10 +2,10 @@
 
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { TalentProfileFormData, talentProfileFormSchema } from '@/lib/validation';
+import { TalentProfileFormData } from '@/lib/validation';
 import { addProfile } from '@/lib/data';
+import { Form } from '@/components/ui/form';
 
 import { BasicInfoStep } from './form-steps/BasicInfoStep';
 import { SkillsStep } from './form-steps/SkillsStep';
@@ -27,21 +27,24 @@ export function ProfileCreationForm() {
   const [error, setError] = React.useState<string | null>(null);
 
   const form = useForm<TalentProfileFormData>({
-    resolver: zodResolver(talentProfileFormSchema),
     defaultValues: {
       name: '',
       title: '',
       department: '',
+      bio: '',
       hourlyRate: undefined,
       dayRate: undefined,
       yearlySalary: undefined,
+      image: {
+        file: undefined,
+        preview: undefined,
+      },
       contact: {
         email: '',
         phone: '',
         website: '',
         social: {
           linkedin: '',
-          twitter: '',
           github: '',
           dribbble: '',
         },
@@ -49,8 +52,9 @@ export function ProfileCreationForm() {
       skills: [],
       availability: {
         status: 'Available',
-        availableFrom: '',
-        notes: '',
+        nextAvailable: '',
+        preferredHours: '',
+        timezone: '',
       },
       education: [],
       certifications: [],
@@ -68,6 +72,9 @@ export function ProfileCreationForm() {
       setIsLoading(true);
       setError(null);
 
+      // Create a copy of the data for submission
+      const submissionData = { ...data };
+
       // Handle image upload if present
       if (data.image?.file) {
         const formData = new FormData();
@@ -84,11 +91,18 @@ export function ProfileCreationForm() {
         }
 
         const { imageUrl } = await imageResponse.json();
-        data.image = { preview: imageUrl };
+        // Store the URL directly in the image field for the database
+        (submissionData as any).image = imageUrl;
+      } else if (data.image?.preview && !data.image.file) {
+        // If we have a preview but no file, use the preview URL (for existing images)
+        (submissionData as any).image = data.image.preview;
+      } else {
+        // No image provided
+        (submissionData as any).image = undefined;
       }
 
       // Create profile with image URL
-      await addProfile(data);
+      await addProfile(submissionData as any);
       router.push('/profiles');
     } catch (error) {
       console.error('Error creating profile:', error);
@@ -99,8 +113,9 @@ export function ProfileCreationForm() {
   };
 
   const nextStep = async () => {
-    const isValid = await form.trigger();
-    if (isValid && currentStep < STEPS.length - 1) {
+    // For the first step, the BasicInfoStep will handle its own validation
+    // For other steps, allow progression (they're mostly optional)
+    if (currentStep < STEPS.length - 1) {
       setCurrentStep((prev) => prev + 1);
     }
   };
@@ -155,7 +170,9 @@ export function ProfileCreationForm() {
           </div>
         </div>
       )}
-      {renderStep()}
+      <Form {...form}>
+        {renderStep()}
+      </Form>
     </div>
   );
 } 

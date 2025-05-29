@@ -1,24 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
 import { getProfile } from '@/lib/actions';
 import { 
   TalentProfile, 
   ProfileSkill, 
-  ProjectCommitment, 
-  SeasonalAvailability,
-  Availability 
+  Availability
 } from '@/types';
 import Link from 'next/link';
-import Image from 'next/image';
 import { 
   Linkedin, 
   Github, 
-  Twitter, 
-  Facebook, 
-  Instagram, 
-  Youtube, 
   Globe, 
   Mail, 
   Phone,
@@ -29,27 +21,36 @@ import {
   Building2,
   Briefcase,
   MessageSquare,
-  Download,
-  Share2,
   MapPin
 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { Separator } from '@/components/ui/separator';
+import { ShareButton } from '@/components/profiles/ShareButton';
 
-export default function ProfileDetailPage({ params }: { params: { id: string } }) {
+// Add Electron dialog import
+declare global {
+  interface Window {
+    electron?: {
+      showMessageBox: (options: { type: string; message: string; buttons: string[] }) => Promise<{ response: number }>;
+      openExternal: (url: string) => Promise<void>;
+    };
+  }
+}
+
+export default function ProfileDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const [profile, setProfile] = useState<TalentProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadProfile = async () => {
       try {
-        const data = await getProfile(params.id as string);
+        const resolvedParams = await params;
+        const data = await getProfile(resolvedParams.id as string);
         setProfile(data || null);
       } catch (error) {
         console.error('Error loading profile:', error);
@@ -60,7 +61,7 @@ export default function ProfileDetailPage({ params }: { params: { id: string } }
     };
 
     loadProfile();
-  }, [params.id]);
+  }, [params]);
 
   if (isLoading) {
     return (
@@ -109,7 +110,11 @@ export default function ProfileDetailPage({ params }: { params: { id: string } }
             <div className="flex items-start gap-6">
               <div className="relative h-24 w-24 print:h-32 print:w-32">
                 <Avatar className="h-full w-full">
-                  <AvatarImage src={profile.image} alt={profile.name} />
+                  <AvatarImage 
+                    src={profile.image} 
+                    alt={profile.name}
+                    className="object-cover"
+                  />
                   <AvatarFallback>{profile.name[0]}</AvatarFallback>
                 </Avatar>
               </div>
@@ -195,18 +200,33 @@ export default function ProfileDetailPage({ params }: { params: { id: string } }
             <Separator className="my-6" />
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-2">
-              <Button variant="default" className="bg-indigo-600 hover:bg-indigo-700">
+              <Button 
+                variant="default" 
+                className="bg-gradient-primary hover:bg-gradient-primary-hover"
+                onClick={async () => {
+                  if (profile.contact.email) {
+                    if (window.electron) {
+                      await window.electron.openExternal(`mailto:${profile.contact.email}`);
+                    } else {
+                      window.location.href = `mailto:${profile.contact.email}`;
+                    }
+                  } else {
+                    if (window.electron) {
+                      await window.electron.showMessageBox({
+                        type: 'info',
+                        message: 'No email found for this profile.',
+                        buttons: ['OK']
+                      });
+                    } else {
+                      alert('No email found for this profile.');
+                    }
+                  }
+                }}
+              >
                 <MessageSquare className="mr-2 h-4 w-4" />
                 Contact
               </Button>
-              <Button variant="outline">
-                <Download className="mr-2 h-4 w-4" />
-                Download CV
-              </Button>
-              <Button variant="outline">
-                <Share2 className="mr-2 h-4 w-4" />
-                Share
-              </Button>
+              <ShareButton profile={profile} />
               <Link href={`/profiles/${profile.id}/edit`}>
                 <Button variant="outline">
                   Edit Profile
@@ -225,18 +245,31 @@ export default function ProfileDetailPage({ params }: { params: { id: string } }
             <h2 className="mb-4 text-lg font-semibold">Rate Card</h2>
             <Table>
               <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">Hourly Rate</TableCell>
-                  <TableCell className="text-right">${profile.hourlyRate}/hr</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Day Rate</TableCell>
-                  <TableCell className="text-right">${profile.dayRate}/day</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Yearly Salary</TableCell>
-                  <TableCell className="text-right">${profile.yearlySalary.toLocaleString()}/year</TableCell>
-                </TableRow>
+                {profile.hourlyRate && (
+                  <TableRow>
+                    <TableCell className="font-medium">Hourly Rate</TableCell>
+                    <TableCell className="text-right">${profile.hourlyRate}/hr</TableCell>
+                  </TableRow>
+                )}
+                {profile.dayRate && (
+                  <TableRow>
+                    <TableCell className="font-medium">Day Rate</TableCell>
+                    <TableCell className="text-right">${profile.dayRate}/day</TableCell>
+                  </TableRow>
+                )}
+                {profile.yearlySalary && (
+                  <TableRow>
+                    <TableCell className="font-medium">Yearly Salary</TableCell>
+                    <TableCell className="text-right">${profile.yearlySalary.toLocaleString()}/year</TableCell>
+                  </TableRow>
+                )}
+                {!profile.hourlyRate && !profile.dayRate && !profile.yearlySalary && (
+                  <TableRow>
+                    <TableCell colSpan={2} className="text-center text-gray-500">
+                      No rate information available
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </div>
@@ -273,10 +306,10 @@ const SkillsSection = ({ skills }: { skills: ProfileSkill[] }) => {
                 <TooltipProvider key={skill.id}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Badge variant="secondary" className="cursor-default">
+                      <div className="inline-flex items-center px-3 py-1.5 bg-gray-100 text-gray-800 rounded-full text-xs font-medium hover:bg-gradient-primary hover:text-white transition-all duration-300 ease-in-out cursor-default group">
                         {skill.name}
-                        <span className="ml-1 text-gray-500">({skill.proficiency})</span>
-                      </Badge>
+                        <span className="ml-1 text-gray-500 group-hover:text-white/75 transition-colors duration-300 ease-in-out">({skill.proficiency})</span>
+                      </div>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Proficiency Level: {skill.proficiency}</p>

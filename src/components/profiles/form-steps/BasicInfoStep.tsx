@@ -8,6 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { ImageUpload } from '@/components/ui/image-upload';
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
 interface BasicInfoStepProps {
   form: UseFormReturn<TalentProfileFormData>;
@@ -15,64 +18,245 @@ interface BasicInfoStepProps {
 }
 
 export function BasicInfoStep({ form, onNext }: BasicInfoStepProps) {
-  const { register, formState: { errors }, setValue, watch } = form;
+  const { register, formState: { errors }, setValue, watch, control, trigger } = form;
+  const [domains, setDomains] = React.useState<string[]>([]);
+  const [loadingDomains, setLoadingDomains] = React.useState(true);
+  const [customDomain, setCustomDomain] = React.useState('');
+  const [isAddingDomain, setIsAddingDomain] = React.useState(false);
+  
+  const selectedDepartment = watch('department');
+  const showCustomInput = selectedDepartment === 'Other';
+
+  // Fetch domains from API on component mount
+  React.useEffect(() => {
+    const fetchDomains = async () => {
+      try {
+        const response = await fetch('/api/domains');
+        if (response.ok) {
+          const domainsData = await response.json();
+          setDomains(domainsData);
+        } else {
+          console.error('Failed to fetch domains');
+          // Fallback to default domains
+          setDomains([
+            'Software Development',
+            'Design', 
+            'Product Management',
+            'Marketing',
+            'Sales',
+            'Operations',
+            'Consulting',
+            'Content Creation',
+            'Data Science',
+            'Quality Assurance'
+          ]);
+        }
+      } catch (error) {
+        console.error('Error fetching domains:', error);
+        // Fallback to default domains
+        setDomains([
+          'Software Development',
+          'Design', 
+          'Product Management',
+          'Marketing',
+          'Sales',
+          'Operations',
+          'Consulting',
+          'Content Creation',
+          'Data Science',
+          'Quality Assurance'
+        ]);
+      } finally {
+        setLoadingDomains(false);
+      }
+    };
+
+    fetchDomains();
+  }, []);
+
+  const handleAddCustomDomain = async () => {
+    if (!customDomain.trim()) return;
+
+    setIsAddingDomain(true);
+    try {
+      const response = await fetch('/api/domains', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: customDomain.trim() }),
+      });
+
+      if (response.ok) {
+        const newDomainName = customDomain.trim();
+        
+        // Update domains list
+        setDomains(prev => [...prev, newDomainName].sort());
+        
+        // Select the new domain
+        setValue('department', newDomainName, { shouldValidate: true });
+        
+        // Clear custom input
+        setCustomDomain('');
+        
+        console.log('✅ Domain added successfully:', newDomainName);
+      } else {
+        const errorData = await response.json();
+        if (response.status === 409) {
+          // Domain already exists, just select it
+          setValue('department', customDomain.trim(), { shouldValidate: true });
+          setCustomDomain('');
+        } else {
+          console.error('Failed to add domain:', errorData.error);
+          alert('Failed to add domain: ' + errorData.error);
+        }
+      }
+    } catch (error) {
+      console.error('Error adding domain:', error);
+      alert('Failed to add domain. Please try again.');
+    } finally {
+      setIsAddingDomain(false);
+    }
+  };
 
   const handleNext = async () => {
-    const isValid = await form.trigger([
-      'name',
-      'title',
-      'department',
-      'contact.email',
-      'contact.phone',
-      'hourlyRate'
-    ]);
+    // If user is adding a custom domain, handle it first
+    if (showCustomInput && customDomain.trim()) {
+      await handleAddCustomDomain();
+      return; // Wait for domain to be added, then user can click Next again
+    }
+    
+    // Validate the required fields for this step
+    const isValid = await trigger(['name', 'title', 'department']);
     if (isValid) {
       onNext();
     }
   };
 
   const handleImageUpload = (file: File, preview: string) => {
-    setValue('image', { file, preview });
+    setValue('image', { file, preview }, { 
+      shouldValidate: true, 
+      shouldDirty: true,
+      shouldTouch: true 
+    });
   };
 
   return (
     <div className="space-y-6">
       <div className="space-y-4">
-        <div>
-          <Label htmlFor="name">Full Name</Label>
-          <Input
-            id="name"
-            {...register('name')}
-            placeholder="Enter your full name"
-          />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+        <FormField
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-sm font-medium text-gray-900">
+                Full Name <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input 
+                  placeholder="Enter full name" 
+                  {...field} 
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                />
+              </FormControl>
+              <FormMessage className="text-red-600 text-sm mt-1" />
+            </FormItem>
           )}
-        </div>
+        />
 
-        <div>
-          <Label htmlFor="title">Job Title</Label>
-          <Input
-            id="title"
-            {...register('title')}
-            placeholder="Enter your job title"
-          />
-          {errors.title && (
-            <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>
+        <FormField
+          control={control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-sm font-medium text-gray-900">
+                Job Title <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <Input 
+                  placeholder="e.g., Senior Software Engineer" 
+                  {...field} 
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                />
+              </FormControl>
+              <FormMessage className="text-red-600 text-sm mt-1" />
+            </FormItem>
           )}
-        </div>
+        />
 
-        <div>
-          <Label htmlFor="department">Domain</Label>
-          <Input
-            id="department"
-            {...register('department')}
-            placeholder="Enter domain expertise i.e. Design, Software Development, Marketing, Sales, etc."
-          />
-          {errors.department && (
-            <p className="mt-1 text-sm text-red-600">{errors.department.message}</p>
+        <FormField
+          control={control}
+          name="department"
+          render={({ field }) => (
+            <FormItem className={showCustomInput ? "sm:col-span-2" : ""}>
+              <FormLabel className="text-sm font-medium text-gray-900">
+                Domain <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <div className="space-y-3">
+                  <Select onValueChange={field.onChange} value={field.value || ""}>
+                    <SelectTrigger className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                      <SelectValue placeholder={loadingDomains ? "Loading domains..." : "Select domain"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {domains.map((domain) => (
+                        <SelectItem key={domain} value={domain}>{domain}</SelectItem>
+                      ))}
+                      <SelectItem value="Other">Other (Add Custom)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  
+                  {showCustomInput && (
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="Enter custom domain (e.g., Cybersecurity, Finance, etc.)"
+                        value={customDomain}
+                        onChange={(e) => setCustomDomain(e.target.value)}
+                        className="flex-1"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleAddCustomDomain();
+                          }
+                        }}
+                      />
+                      <Button 
+                        type="button"
+                        onClick={handleAddCustomDomain}
+                        disabled={!customDomain.trim() || isAddingDomain}
+                        size="sm"
+                      >
+                        {isAddingDomain ? 'Adding...' : 'Add'}
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </FormControl>
+              <FormMessage className="text-red-600 text-sm mt-1" />
+            </FormItem>
           )}
-        </div>
+        />
+
+        <FormField
+          control={control}
+          name="bio"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-sm font-medium text-gray-900">
+                Bio
+              </FormLabel>
+              <FormControl>
+                <Textarea 
+                  placeholder="Brief professional bio or description" 
+                  {...field} 
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                  rows={4}
+                />
+              </FormControl>
+              <FormMessage className="text-red-600 text-sm mt-1" />
+            </FormItem>
+          )}
+        />
 
         <div>
           <Label htmlFor="hourlyRate">Hourly Rate ($)</Label>
@@ -199,32 +383,6 @@ export function BasicInfoStep({ form, onNext }: BasicInfoStepProps) {
           </div>
 
           <div>
-            <Label htmlFor="twitter">Twitter</Label>
-            <Input
-              id="twitter"
-              type="url"
-              {...register('contact.social.twitter')}
-              placeholder="https://twitter.com/username"
-            />
-            {errors.contact?.social?.twitter && (
-              <p className="mt-1 text-sm text-red-600">{errors.contact.social.twitter.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="behance">Behance</Label>
-            <Input
-              id="behance"
-              type="url"
-              {...register('contact.social.behance')}
-              placeholder="https://behance.net/username"
-            />
-            {errors.contact?.social?.behance && (
-              <p className="mt-1 text-sm text-red-600">{errors.contact.social.behance.message}</p>
-            )}
-          </div>
-
-          <div>
             <Label htmlFor="dribbble">Dribbble</Label>
             <Input
               id="dribbble"
@@ -234,19 +392,6 @@ export function BasicInfoStep({ form, onNext }: BasicInfoStepProps) {
             />
             {errors.contact?.social?.dribbble && (
               <p className="mt-1 text-sm text-red-600">{errors.contact.social.dribbble.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="instagram">Instagram</Label>
-            <Input
-              id="instagram"
-              type="url"
-              {...register('contact.social.instagram')}
-              placeholder="https://instagram.com/username"
-            />
-            {errors.contact?.social?.instagram && (
-              <p className="mt-1 text-sm text-red-600">{errors.contact.social.instagram.message}</p>
             )}
           </div>
         </div>

@@ -39,3 +39,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Database files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Temporary migration scripts and installers
+node-v20.19.2-x64.msi
+requirements.txt
+scripts/check-*.js
+scripts/fix-*.js
+scripts/migrate-*.js
+scripts/migrate_*.py
+scripts/populate-*.js
+scripts/test-*.js
+*.backup

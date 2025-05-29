@@ -790,6 +790,29 @@
           "date": "2023-01-01"
         }
       ]
+    },
+    {
+      "name": "Who Are You?",
+      "contact": {
+        "email": "",
+        "phone": "",
+        "website": "",
+        "social": {
+          "linkedin": "",
+          "github": "",
+          "dribbble": ""
+        }
+      },
+      "skills": [],
+      "availability": {
+        "status": "Available",
+        "capacity": {
+          "preferredProjectDuration": {}
+        }
+      },
+      "education": [],
+      "certifications": [],
+      "id": "6322sq5mz"
     }
   ]
 }

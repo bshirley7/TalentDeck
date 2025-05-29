@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Skill } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { EditSkillForm } from './EditSkillForm';
 
@@ -70,7 +70,7 @@ export function SkillsManagementTable({ skills, onDelete, onEdit }: SkillsManage
           placeholder="Search skills..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="max-w-sm"
+          className="max-w-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
       </div>
 
@@ -80,22 +80,22 @@ export function SkillsManagementTable({ skills, onDelete, onEdit }: SkillsManage
             <tr>
               <th
                 scope="col"
-                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 cursor-pointer"
+                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 cursor-pointer hover:text-gradient-brand transition-colors"
                 onClick={() => requestSort('name')}
               >
                 Name
                 {sortConfig.key === 'name' && (
-                  <span>{sortConfig.direction === 'asc' ? ' ↑' : ' ↓'}</span>
+                  <span className="text-gradient-brand">{sortConfig.direction === 'asc' ? ' ↑' : ' ↓'}</span>
                 )}
               </th>
               <th
                 scope="col"
-                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 cursor-pointer"
+                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 cursor-pointer hover:text-gradient-brand transition-colors"
                 onClick={() => requestSort('category')}
               >
                 Category
                 {sortConfig.key === 'category' && (
-                  <span>{sortConfig.direction === 'asc' ? ' ↑' : ' ↓'}</span>
+                  <span className="text-gradient-brand">{sortConfig.direction === 'asc' ? ' ↑' : ' ↓'}</span>
                 )}
               </th>
               <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -103,9 +103,9 @@ export function SkillsManagementTable({ skills, onDelete, onEdit }: SkillsManage
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 bg-white">
+          <tbody className="divide-y divide-gray-200">
             {sortedSkills.map((skill) => (
-              <tr key={skill.id}>
+              <tr key={skill.id} className="hover:bg-gray-50 transition-colors">
                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
                   {skill.name}
                 </td>
@@ -119,7 +119,7 @@ export function SkillsManagementTable({ skills, onDelete, onEdit }: SkillsManage
                         variant="ghost"
                         size="sm"
                         onClick={() => handleEditClick(skill)}
-                        className="text-blue-600 hover:text-blue-900"
+                        className="bg-gradient-primary/10 text-gradient-brand hover:bg-gradient-primary hover:text-white transition-all duration-200"
                       >
                         <PencilIcon className="h-4 w-4" />
                         <span className="sr-only">Edit</span>
@@ -129,7 +129,7 @@ export function SkillsManagementTable({ skills, onDelete, onEdit }: SkillsManage
                       variant="ghost"
                       size="sm"
                       onClick={() => onDelete(skill.id)}
-                      className="text-red-600 hover:text-red-900"
+                      className="text-red-600 hover:text-red-900 hover:bg-red-50 transition-all duration-200"
                     >
                       <TrashIcon className="h-4 w-4" />
                       <span className="sr-only">Delete</span>
@@ -142,7 +142,7 @@ export function SkillsManagementTable({ skills, onDelete, onEdit }: SkillsManage
         </table>
       </div>
 
-      {selectedSkill && onEdit && (
+      {selectedSkill && (
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogContent>
             <DialogHeader>

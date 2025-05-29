@@ -18,7 +18,7 @@ export default function SkillsPage() {
         const data = await response.json();
         setSkills(data);
       } catch (err) {
-        setError('Failed to load skills');
+        setError(err instanceof Error ? err.message : 'Failed to load skills');
       } finally {
         setLoading(false);
       }
@@ -49,12 +49,12 @@ export default function SkillsPage() {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Skills Directory</h1>
           <p className="mt-2 text-gray-600">
-            Browse and manage the organization's skills inventory.
+            Browse and manage the organization&apos;s skills inventory.
           </p>
         </div>
         <Link
           href="/skills/manage"
-          className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="inline-flex items-center rounded-md border border-transparent bg-gradient-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gradient-primary-hover focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
         >
           Manage Skills
         </Link>

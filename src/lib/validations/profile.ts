@@ -9,6 +9,23 @@ const capacitySchema = z.object({
   }),
 });
 
+const experienceSchema = z.object({
+  company: z.string().min(1, 'Company name is required'),
+  title: z.string().min(1, 'Job title is required'),
+  location: z.string().optional(),
+  startDate: z.string().min(1, 'Start date is required'),
+  endDate: z.string().optional(),
+  isCurrent: z.boolean().optional(),
+  description: z.string().optional(),
+  skillsUsed: z.array(z.string()).optional(),
+  achievements: z.array(z.string()).optional(),
+});
+
+const noteSchema = z.object({
+  content: z.string().min(1, 'Note content is required'),
+  category: z.string().optional(),
+});
+
 export const profileSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   title: z.string().min(1, 'Title is required'),
@@ -31,6 +48,8 @@ export const profileSchema = z.object({
     category: z.string().min(1, 'Category is required'),
     proficiency: z.enum(['Beginner', 'Intermediate', 'Advanced', 'Expert']),
   })),
+  notes: z.array(noteSchema).optional(),
+  experience: z.array(experienceSchema).optional(),
   education: z.array(z.object({
     degree: z.string().min(1, 'Degree is required'),
     institution: z.string().min(1, 'Institution is required'),

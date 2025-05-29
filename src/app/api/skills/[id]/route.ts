@@ -1,13 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { store } from '@/lib/store';
+import { DataStore } from '@/lib/store';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
+    const store = await DataStore.getInstance();
+    
     // Attempt to delete the skill
-    const success = store.deleteSkill(params.id);
+    const success = await store.deleteSkill(id);
     
     if (!success) {
       return NextResponse.json(

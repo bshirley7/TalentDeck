@@ -18,16 +18,8 @@ interface AvailabilityStepProps {
 export function AvailabilityStep({ form, onNext, onPrev }: AvailabilityStepProps) {
   const { register, formState: { errors } } = form;
 
-  const handleNext = async () => {
-    const isValid = await form.trigger([
-      'availability.status',
-      'availability.availableFrom',
-      'availability.capacity.weeklyHours',
-      'availability.capacity.maxConcurrentProjects'
-    ]);
-    if (isValid) {
-      onNext();
-    }
+  const handleNext = () => {
+    onNext();
   };
 
   return (
@@ -153,7 +145,7 @@ export function AvailabilityStep({ form, onNext, onPrev }: AvailabilityStepProps
               id="bookingLeadTime"
               type="number"
               min="0"
-              {...register('availability.bookingLeadTime')}
+              {...register('availability.bookingLeadTime', { valueAsNumber: true })}
             />
             {errors.availability?.bookingLeadTime && (
               <p className="mt-1 text-sm text-red-600">

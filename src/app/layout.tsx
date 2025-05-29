@@ -13,8 +13,8 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'TalentDeck - Discover Your TalentDeck',
-  description: 'Manage and discover internal talent resources all-in-one place.',
+  title: 'On Deck - Your Professional Rolodex',
+  description: 'On Deck is your personal rolodex of heavy hitters. Browse, manage, action your professional contacts in this rapidly searchable database.',
   icons: [
     {
       rel: 'icon',

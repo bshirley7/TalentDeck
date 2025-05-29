@@ -45,7 +45,7 @@ const TalentCard = ({ name, title, image, skills }: TalentCardProps) => {
                 .join('')
                 .toUpperCase();
               const initialsDiv = document.createElement('div');
-              initialsDiv.className = 'absolute inset-0 flex items-center justify-center text-4xl font-bold text-indigo-600';
+              initialsDiv.className = 'absolute inset-0 flex items-center justify-center text-4xl font-bold text-gradient-primary';
               initialsDiv.textContent = initials;
               parent.appendChild(initialsDiv);
             }
@@ -69,7 +69,7 @@ const TalentCard = ({ name, title, image, skills }: TalentCardProps) => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.2 }}
-              className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full"
+              className="px-2 py-1 text-xs bg-gradient-primary text-white rounded-full hover:bg-gradient-primary-hover transition-all duration-200"
             >
               {skill.name}
             </motion.span>

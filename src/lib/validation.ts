@@ -63,63 +63,117 @@ export const availabilitySchema = z.object({
   nextAvailable: z.string().optional(),
   preferredHours: z.string().optional(),
   timezone: z.string().optional(),
-  bookingLeadTime: z.number().min(0).optional(),
+  bookingLeadTime: z.preprocess(
+    (val) => (val === '' || val === null || val === undefined) ? undefined : Number(val),
+    z.number().min(0).optional()
+  ),
   currentCommitments: z.array(projectCommitmentSchema).optional(),
   seasonalAvailability: z.array(seasonalAvailabilitySchema).optional(),
   capacity: capacitySchema.optional()
 });
 
+const preprocessString = (val: unknown) => {
+  if (val === '' || val === null || val === undefined) return undefined;
+  return val;
+};
+
+const preprocessNumber = (val: unknown) => (val === '' || val === null || Number.isNaN(val) ? undefined : val);
+
 // Form validation schema (more flexible)
 export const talentProfileFormSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  title: z.string().min(1, 'Title is required'),
-  department: z.string().min(1, 'Department is required'),
-  hourlyRate: z.number().min(0, 'Hourly rate must be positive').optional(),
-  dayRate: z.number().min(0, 'Day rate must be positive').optional(),
-  yearlySalary: z.number().min(0, 'Yearly salary must be positive').optional(),
+  name: z.string().min(1, 'Full name is required'),
+  title: z.string().min(1, 'Job title is required'),
+  department: z.string().min(1, 'Domain is required'),
+  bio: z.string().optional(),
+  hourlyRate: z.preprocess(preprocessNumber, z.number().min(0, 'Hourly rate must be positive').optional()),
+  dayRate: z.preprocess(preprocessNumber, z.number().min(0, 'Day rate must be positive').optional()),
+  yearlySalary: z.preprocess(preprocessNumber, z.number().min(0, 'Yearly salary must be positive').optional()),
   projectRates: z.object({
-    weekly: z.number().min(0, 'Weekly rate must be positive'),
-    monthly: z.number().min(0, 'Monthly rate must be positive'),
-    quarterly: z.number().min(0, 'Quarterly rate must be positive'),
-    yearly: z.number().min(0, 'Yearly rate must be positive'),
-    minimumDuration: z.number().min(1, 'Minimum duration must be at least 1 day'),
-    maximumDuration: z.number().min(1, 'Maximum duration must be at least 1 day'),
-    discountPercentage: z.number().min(0).max(100, 'Discount percentage must be between 0 and 100').optional(),
+    weekly: z.preprocess(preprocessNumber, z.number().min(0, 'Weekly rate must be positive').optional()),
+    monthly: z.preprocess(preprocessNumber, z.number().min(0, 'Monthly rate must be positive').optional()),
+    quarterly: z.preprocess(preprocessNumber, z.number().min(0, 'Quarterly rate must be positive').optional()),
+    yearly: z.preprocess(preprocessNumber, z.number().min(0, 'Yearly rate must be positive').optional()),
+    minimumDuration: z.preprocess(preprocessNumber, z.number().min(1, 'Minimum duration must be at least 1 day').optional()),
+    maximumDuration: z.preprocess(preprocessNumber, z.number().min(1, 'Maximum duration must be at least 1 day').optional()),
+    discountPercentage: z.preprocess(preprocessNumber, z.number().min(0).max(100, 'Discount percentage must be between 0 and 100').optional()),
   }).optional(),
-  image: z.object({
-    file: z.any().optional(),
-    preview: z.string().optional(),
-  }).optional(),
+  image: z.union([
+    z.string().optional(), // For URL strings
+    z.object({
+      file: z.any().optional(),
+      preview: z.string().optional(),
+    }).optional(),
+    z.null(),
+  ]).optional(),
   contact: z.object({
-    email: z.string().email('Invalid email address'),
-    phone: z.string().min(10, 'Phone number must be at least 10 digits'),
-    website: z.string().url('Invalid URL').optional(),
+    email: z.string()
+      .optional()
+      .refine(val => !val || val.trim() === '' || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val), {
+        message: 'Invalid email address',
+      }),
+    phone: z.string()
+      .optional()
+      .refine(val => !val || val.trim() === '' || val.replace(/\D/g, '').length >= 10, {
+        message: 'Phone number must be at least 10 digits',
+      }),
+    website: z.string()
+      .optional()
+      .refine(val => !val || val.trim() === '' || /^https?:\/\/.+\..+/.test(val), {
+        message: 'Invalid URL',
+      }),
+    location: z.string().optional(),
     social: z.object({
-      linkedin: z.string().url('Invalid LinkedIn URL').optional(),
-      github: z.string().url('Invalid GitHub URL').optional(),
-      dribbble: z.string().url('Invalid Dribbble URL').optional(),
-    }).default({}),
-  }),
-  skills: z.array(skillSchema),
+      linkedin: z.string()
+        .optional()
+        .refine(val => !val || val.trim() === '' || /^https?:\/\/.+\..+/.test(val), {
+          message: 'Invalid LinkedIn URL',
+        }),
+      github: z.string()
+        .optional()
+        .refine(val => !val || val.trim() === '' || /^https?:\/\/.+\..+/.test(val), {
+          message: 'Invalid GitHub URL',
+        }),
+      dribbble: z.string()
+        .optional()
+        .refine(val => !val || val.trim() === '' || /^https?:\/\/.+\..+/.test(val), {
+          message: 'Invalid Dribbble URL',
+        }),
+    }).optional(),
+  }).optional(),
+  skills: z.array(skillSchema).optional(),
   availability: z.object({
-    status: z.enum(['Available', 'On Project', 'On Leave', 'Limited', 'Unavailable']),
-    nextAvailable: z.string().optional(),
-    preferredHours: z.string().optional(),
-    timezone: z.string().optional(),
-  }),
+    status: z.enum(['Available', 'On Project', 'On Leave', 'Limited', 'Unavailable']).optional(),
+    availableFrom: z.preprocess(preprocessString, z.string().optional()),
+    nextAvailable: z.preprocess(preprocessString, z.string().optional()),
+    preferredHours: z.preprocess(preprocessString, z.string().optional()),
+    timezone: z.preprocess(preprocessString, z.string().optional()),
+    bookingLeadTime: z.preprocess(preprocessNumber, z.number().min(0).optional()),
+    currentCommitments: z.array(z.any()).optional(),
+    seasonalAvailability: z.array(z.any()).optional(),
+    capacity: z.object({
+      weeklyHours: z.preprocess(preprocessNumber, z.number().min(0).max(168).optional()),
+      maxConcurrentProjects: z.preprocess(preprocessNumber, z.number().min(1).optional()),
+      preferredProjectDuration: z.object({
+        min: z.preprocess(preprocessNumber, z.number().min(1).optional()),
+        max: z.preprocess(preprocessNumber, z.number().min(1).optional()),
+      }).refine(data => data.max === undefined || data.min === undefined || data.max >= data.min, {
+        message: "Maximum duration must be greater than or equal to minimum duration"
+      }).optional(),
+    }).optional(),
+  }).optional(),
   education: z.array(z.object({
-    institution: z.string(),
-    degree: z.string(),
-    field: z.string(),
-    startDate: z.string(),
-    endDate: z.string().optional(),
-    description: z.string().optional(),
+    institution: z.string().transform(val => val === '' ? undefined : val).optional(),
+    degree: z.string().transform(val => val === '' ? undefined : val).optional(),
+    field: z.string().transform(val => val === '' ? undefined : val).optional(),
+    startDate: z.string().transform(val => val === '' ? undefined : val).optional(),
+    endDate: z.string().transform(val => val === '' ? undefined : val).optional(),
+    description: z.string().transform(val => val === '' ? undefined : val).optional(),
   })).optional(),
   certifications: z.array(z.object({
-    name: z.string(),
-    issuer: z.string(),
-    date: z.string(),
-    description: z.string().optional(),
+    name: z.string().transform(val => val === '' ? undefined : val).optional(),
+    issuer: z.string().transform(val => val === '' ? undefined : val).optional(),
+    date: z.string().transform(val => val === '' ? undefined : val).optional(),
+    description: z.string().transform(val => val === '' ? undefined : val).optional(),
   })).optional(),
 });
 
@@ -128,5 +182,6 @@ export const talentProfileSchema = talentProfileFormSchema.extend({
   id: z.string(),
 });
 
-export type TalentProfile = z.infer<typeof talentProfileSchema>;
-export type TalentProfileFormData = z.infer<typeof talentProfileFormSchema>; 
+// Type inference from schema
+export type TalentProfileFormData = z.infer<typeof talentProfileFormSchema>;
+export type TalentProfile = z.infer<typeof talentProfileSchema>; 

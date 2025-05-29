@@ -9,7 +9,8 @@ const categorySchema = z.object({
 
 export async function GET() {
   try {
-    const categories = store.getCategories();
+    const storeInstance = await store;
+    const categories = await storeInstance.getCategories();
     return NextResponse.json(categories);
   } catch (error) {
     console.error('Error fetching categories:', error);
@@ -25,7 +26,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = categorySchema.parse(body);
     
-    const success = store.addCategory(validatedData.name);
+    const storeInstance = await store;
+    const success = await storeInstance.addCategory(validatedData.name);
     if (!success) {
       return NextResponse.json(
         { error: 'Category already exists' },
@@ -60,8 +62,9 @@ export async function PUT(request: NextRequest) {
       );
     }
 
+    const storeInstance = await store;
     // Check if old category exists
-    const categories = store.getCategories();
+    const categories = await storeInstance.getCategories();
     if (!categories.includes(oldName)) {
       return NextResponse.json(
         { error: 'Category not found' },
@@ -78,7 +81,7 @@ export async function PUT(request: NextRequest) {
     }
 
     // Update the category name
-    const success = store.updateCategory(oldName, validatedData.name);
+    const success = await storeInstance.updateCategory(oldName, validatedData.name);
     if (!success) {
       return NextResponse.json(
         { error: 'Failed to update category' },
@@ -112,7 +115,8 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    const success = store.deleteCategory(category);
+    const storeInstance = await store;
+    const success = await storeInstance.deleteCategory(category);
     if (!success) {
       return NextResponse.json(
         { error: 'Category not found or could not be deleted' },

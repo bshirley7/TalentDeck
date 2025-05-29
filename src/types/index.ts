@@ -74,15 +74,32 @@ export interface Availability {
   hours?: string;
 }
 
+export interface Experience {
+  id?: string;
+  company: string;
+  title: string;
+  location?: string;
+  startDate: string;
+  endDate?: string;
+  isCurrent?: boolean;
+  description?: string;
+  skillsUsed?: string[];
+  achievements?: string[];
+}
+
 export interface TalentProfile {
   id: string;
   name: string;
-  department: string;
   title: string;
+  department: string;
+  bio?: string;
   image?: string;
-  hourlyRate: number;
-  dayRate: number;
-  yearlySalary: number;
+  contact: ContactInfo;
+  skills?: ProfileSkill[];
+  availability: Availability;
+  hourlyRate?: number;
+  dayRate?: number;
+  yearlySalary?: number;
   projectRates?: {
     weekly: number;
     monthly: number;
@@ -92,14 +109,6 @@ export interface TalentProfile {
     maximumDuration: number; // in days
     discountPercentage?: number; // for longer projects
   };
-  contact: ContactInfo;
-  skills: ProfileSkill[];
-  availability: Availability;
-  bio?: string;
-  about?: string;
-  location?: string;
-  yearsOfExperience?: number;
-  tags?: string[];
   education?: Array<{
     institution: string;
     degree: string;
@@ -126,4 +135,60 @@ export interface SkillsDirectory {
 export interface DataStore {
   profiles: TalentProfile[];
   skills: SkillsDirectory[];
+}
+
+export interface TalentProfileFormData {
+  name: string;
+  title: string;
+  department: string;
+  bio?: string;
+  hourlyRate?: number;
+  dayRate?: number;
+  yearlySalary?: number;
+  image?: {
+    file?: File;
+    preview?: string;
+  };
+  contact?: {
+    email?: string;
+    phone?: string;
+    website?: string;
+    location?: string;
+    social?: {
+      linkedin?: string;
+      github?: string;
+      dribbble?: string;
+    };
+  };
+  skills?: ProfileSkill[];
+  availability?: {
+    status?: 'Available' | 'On Project' | 'On Leave' | 'Limited' | 'Unavailable';
+    availableFrom?: string;
+    nextAvailable?: string;
+    preferredHours?: string;
+    timezone?: string;
+    bookingLeadTime?: number;
+    capacity?: {
+      weeklyHours?: number;
+      maxConcurrentProjects?: number;
+      preferredProjectDuration?: {
+        min?: number;
+        max?: number;
+      };
+    };
+  };
+  education?: Array<{
+    institution?: string;
+    degree?: string;
+    field?: string;
+    startDate?: string;
+    endDate?: string;
+    description?: string;
+  }>;
+  certifications?: Array<{
+    name?: string;
+    issuer?: string;
+    date?: string;
+    description?: string;
+  }>;
 } 

@@ -2,31 +2,53 @@
 
 import { useEffect, useState } from 'react';
 import { getAllProfiles } from '@/lib/actions';
-import { ProfileTable } from '@/components/profiles/ProfileTable';
-import { ProfileSearch } from '@/components/profiles/ProfileSearch';
+import { ProfileTable, ProfileSearch } from '@/components/profiles/display';
+import { ExportProfiles } from '@/components/profiles/ExportProfiles';
 import Link from 'next/link';
 import { TalentProfile } from '@/types';
 
 export default function ProfilesPage() {
   const [profiles, setProfiles] = useState<TalentProfile[]>([]);
   const [filteredProfiles, setFilteredProfiles] = useState<TalentProfile[]>([]);
+  const [selectedProfileIds, setSelectedProfileIds] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const loadProfiles = async () => {
+    try {
+      const data = await getAllProfiles();
+      setProfiles(data);
+      setFilteredProfiles(data);
+    } catch (error) {
+      console.error('Error loading profiles:', error);
+    }
+  };
+
   useEffect(() => {
-    const loadProfiles = async () => {
-      try {
-        const data = await getAllProfiles();
-        setProfiles(data);
-        setFilteredProfiles(data);
-      } catch (error) {
-        console.error('Error loading profiles:', error);
-      } finally {
-        setIsLoading(false);
-      }
+    const initializeProfiles = async () => {
+      setIsLoading(true);
+      await loadProfiles();
+      setIsLoading(false);
     };
 
-    loadProfiles();
+    initializeProfiles();
   }, []);
+
+  async function handleDelete(id: string) {
+    if (!window.confirm('Are you sure you want to delete this profile?')) return;
+    
+    try {
+      const response = await fetch(`/api/profiles/${id}`, { method: 'DELETE' });
+      if (response.ok) {
+        // Refresh the profile list from the server instead of updating local state
+        await loadProfiles();
+        console.log('✅ Profile deleted and list refreshed');
+      } else {
+        console.error('Failed to delete profile');
+      }
+    } catch (error) {
+      console.error('Error deleting profile:', error);
+    }
+  }
 
   if (isLoading) {
     return (
@@ -50,7 +72,7 @@ export default function ProfilesPage() {
         </div>
         <Link
           href="/profiles/new"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-primary hover:bg-gradient-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
         >
           Create New Profile
         </Link>
@@ -58,11 +80,28 @@ export default function ProfilesPage() {
 
       <ProfileSearch profiles={profiles} onSearch={setFilteredProfiles} />
       
-      <div className="mb-4 text-sm text-gray-500">
-        Showing {filteredProfiles.length} of {profiles.length} profiles
+      <div className="mb-4 flex justify-between items-center">
+        <div className="text-sm text-gray-500">
+          Showing {filteredProfiles.length} of {profiles.length} profiles
+          {selectedProfileIds.length > 0 && (
+            <span className="ml-2 font-medium text-blue-600">
+              • {selectedProfileIds.length} selected
+            </span>
+          )}
+        </div>
+        {selectedProfileIds.length > 0 && (
+          <ExportProfiles 
+            profiles={profiles.filter(p => selectedProfileIds.includes(p.id))} 
+          />
+        )}
       </div>
 
-      <ProfileTable profiles={filteredProfiles} />
+      <ProfileTable 
+        profiles={filteredProfiles} 
+        onDelete={handleDelete}
+        selectedProfiles={selectedProfileIds}
+        onProfileSelectionChange={setSelectedProfileIds}
+      />
     </div>
   );
 } 

@@ -15,9 +15,39 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
   const [availability, setAvailability] = useState('');
   const [selectedSkills, setSelectedSkills] = useState<SelectedSkill[]>([]);
 
-  // Get unique departments
-  const departments = Array.from(new Set(profiles.map(p => p.department)));
+  // State for all available domains from database
+  const [allAvailableDomains, setAllAvailableDomains] = useState<string[]>([]);
+  const [isLoadingDomains, setIsLoadingDomains] = useState(false);
+
+  // Get unique departments - DEPRECATED: Use API instead
+  const departmentsFromProfiles = Array.from(new Set(profiles.map(p => p.department)));
   const availabilityOptions = ['Available', 'Busy', 'Away'];
+
+  // Fetch all available domains from database on component mount
+  useEffect(() => {
+    const fetchDomains = async () => {
+      try {
+        setIsLoadingDomains(true);
+        const response = await fetch('/api/domains');
+        if (!response.ok) {
+          throw new Error('Failed to fetch domains');
+        }
+        const domainsData = await response.json();
+        setAllAvailableDomains(domainsData);
+      } catch (error) {
+        console.error('Error fetching domains:', error);
+        // Fallback to domains from profiles if API fails
+        setAllAvailableDomains(departmentsFromProfiles);
+      } finally {
+        setIsLoadingDomains(false);
+      }
+    };
+
+    fetchDomains();
+  }, []); // Remove departmentsFromProfiles dependency to prevent infinite loop
+
+  // Use all available domains from database, fallback to profile domains if needed
+  const departments = allAvailableDomains.length > 0 ? allAvailableDomains : departmentsFromProfiles;
 
   useEffect(() => {
     const filteredProfiles = profiles.filter(profile => {
@@ -73,10 +103,13 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
             id="department"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
-            className="mt-1 block w-full h-10 px-3 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            disabled={isLoadingDomains}
+            className="mt-1 block w-full h-10 px-3 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm disabled:bg-gray-100 disabled:text-gray-500"
           >
-            <option value="">All Domains</option>
-            {departments.map((dept) => (
+            <option value="">
+              {isLoadingDomains ? "Loading domains..." : "All Domains"}
+            </option>
+            {!isLoadingDomains && departments.map((dept) => (
               <option key={dept} value={dept}>
                 {dept}
               </option>
@@ -104,7 +137,13 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
           </select>
         </div>
 
-                {/* Skills Filter - Dropdown */}        <div>          <label htmlFor="skills" className="block text-sm font-medium text-gray-700 mb-1">            Skills          </label>          <div style={{             border: '20px solid red',             padding: '30px',             backgroundColor: 'yellow',            margin: '20px 0'          }}>            <h1 style={{ color: 'red', fontSize: '24px', fontWeight: 'bold' }}>              🚨🚨🚨 SKILLS SECTION FOUND! 🚨🚨🚨            </h1>            <p>If you see this, the ProfileSearch component is working!</p>            <button               onClick={() => {                console.log('🔥 INLINE TEST BUTTON CLICKED!');                alert('Button works! Component is loading correctly.');              }}              style={{                 padding: '15px 30px',                 backgroundColor: 'red',                 color: 'white',                 border: 'none',                cursor: 'pointer',                fontSize: '16px'              }}            >              CLICK ME TO TEST            </button>          </div>          <SkillsDropdown value={selectedSkills} onChange={setSelectedSkills} />        </div>
+        {/* Skills Filter - Dropdown */}
+        <div>
+          <label htmlFor="skills" className="block text-sm font-medium text-gray-700 mb-1">
+            Skills
+          </label>
+          <SkillsDropdown value={selectedSkills} onChange={setSelectedSkills} />
+        </div>
       </div>
 
       {/* Active Filters */}

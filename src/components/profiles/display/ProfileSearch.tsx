@@ -17,24 +17,74 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
   const [skillSearch, setSkillSearch] = useState('');
   const [showSkillDropdown, setShowSkillDropdown] = useState(false);
   const [skillFilterMode, setSkillFilterMode] = useState<'any' | 'all'>('any'); // OR vs AND logic
+  
+  // State for all available skills from database
+  const [allAvailableSkills, setAllAvailableSkills] = useState<Array<{ id: string; name: string; category: string }>>([]);
+  const [isLoadingSkills, setIsLoadingSkills] = useState(false);
 
-  // Get unique departments for dropdown (filter out null/undefined)
-  const departments = Array.from(new Set(
+  // State for all available domains from database
+  const [allAvailableDomains, setAllAvailableDomains] = useState<string[]>([]);
+  const [isLoadingDomains, setIsLoadingDomains] = useState(false);
+
+  // Get unique departments for dropdown (filter out null/undefined) - DEPRECATED: Use API instead
+  const departmentsFromProfiles = Array.from(new Set(
     profiles
       .map(p => p.department)
       .filter((dept): dept is string => dept != null && dept !== '')
   ));
+  
   const availabilityOptions = ['Available', 'On Project', 'On Leave', 'Limited', 'Unavailable'];
   
-  // Get all unique skills from profiles (with null safety)
-  const allSkills = Array.from(
-    new Set(
-      profiles
-        .flatMap(p => p.skills || [])
-        .map(s => s.name)
-        .filter((name): name is string => name != null && name !== '')
-    )
-  ).sort();
+  // Fetch all available skills from database on component mount
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        setIsLoadingSkills(true);
+        const response = await fetch('/api/skills');
+        if (!response.ok) {
+          throw new Error('Failed to fetch skills');
+        }
+        const skillsData = await response.json();
+        setAllAvailableSkills(skillsData);
+      } catch (error) {
+        console.error('Error fetching skills:', error);
+        setAllAvailableSkills([]);
+      } finally {
+        setIsLoadingSkills(false);
+      }
+    };
+
+    fetchSkills();
+  }, []);
+
+  // Fetch all available domains from database on component mount
+  useEffect(() => {
+    const fetchDomains = async () => {
+      try {
+        setIsLoadingDomains(true);
+        const response = await fetch('/api/domains');
+        if (!response.ok) {
+          throw new Error('Failed to fetch domains');
+        }
+        const domainsData = await response.json();
+        setAllAvailableDomains(domainsData);
+      } catch (error) {
+        console.error('Error fetching domains:', error);
+        // Fallback to domains from profiles if API fails
+        setAllAvailableDomains(departmentsFromProfiles);
+      } finally {
+        setIsLoadingDomains(false);
+      }
+    };
+
+    fetchDomains();
+  }, []);
+
+  // Use all available domains from database, fallback to profile domains if needed
+  const departments = allAvailableDomains.length > 0 ? allAvailableDomains : departmentsFromProfiles;
+
+  // Get skill names for dropdown filtering
+  const allSkills = allAvailableSkills.map(skill => skill.name).sort();
 
   // Filter skills based on search term and exclude already selected
   const filteredSkills = allSkills.filter(skill => 
@@ -120,10 +170,13 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
             id="department"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
-            className="mt-1 block w-full h-10 px-3 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm"
+            disabled={isLoadingDomains}
+            className="mt-1 block w-full h-10 px-3 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm disabled:bg-gray-100 disabled:text-gray-500"
           >
-            <option value="">All Domains</option>
-            {departments.map((dept) => (
+            <option value="">
+              {isLoadingDomains ? "Loading domains..." : "All Domains"}
+            </option>
+            {!isLoadingDomains && departments.map((dept) => (
               <option key={dept} value={dept}>
                 {dept}
               </option>
@@ -167,8 +220,9 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
               }}
               onFocus={() => setShowSkillDropdown(true)}
               onBlur={() => setTimeout(() => setShowSkillDropdown(false), 200)}
-              placeholder="Search skills..."
-              className="mt-1 block w-full h-10 px-3 pr-10 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm"
+              placeholder={isLoadingSkills ? "Loading skills..." : "Search skills..."}
+              disabled={isLoadingSkills}
+              className="mt-1 block w-full h-10 px-3 pr-10 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm disabled:bg-gray-100 disabled:text-gray-500"
             />
             <button
               type="button"
@@ -179,21 +233,33 @@ export function ProfileSearch({ profiles, onSearch }: ProfileSearchProps) {
             </button>
             
             {/* Skills Dropdown */}
-            {showSkillDropdown && filteredSkills.length > 0 && (
+            {showSkillDropdown && (
               <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
-                {filteredSkills.slice(0, 10).map((skill) => (
-                  <button
-                    key={skill}
-                    type="button"
-                    onClick={() => addSkill(skill)}
-                    className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gradient-primary hover:text-white transition-colors"
-                  >
-                    {skill}
-                  </button>
-                ))}
-                {filteredSkills.length > 10 && (
-                  <div className="px-3 py-2 text-xs text-gray-500 border-t">
-                    {filteredSkills.length - 10} more skills available...
+                {isLoadingSkills ? (
+                  <div className="px-3 py-2 text-sm text-gray-500 text-center">
+                    Loading skills...
+                  </div>
+                ) : filteredSkills.length > 0 ? (
+                  <>
+                    {filteredSkills.slice(0, 10).map((skill) => (
+                      <button
+                        key={skill}
+                        type="button"
+                        onClick={() => addSkill(skill)}
+                        className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gradient-primary hover:text-white transition-colors"
+                      >
+                        {skill}
+                      </button>
+                    ))}
+                    {filteredSkills.length > 10 && (
+                      <div className="px-3 py-2 text-xs text-gray-500 border-t">
+                        {filteredSkills.length - 10} more skills available...
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="px-3 py-2 text-sm text-gray-500 text-center">
+                    {skillSearch ? `No skills found matching "${skillSearch}"` : 'Start typing to search skills...'}
                   </div>
                 )}
               </div>
